@@ -130,6 +130,7 @@ export default defineComponent({
     width: 200px;
     height: auto;
     margin-right: 10px;
+    margin-bottom: 10px;
     border-radius: 20px;
     background: #fff;
     display: flex;

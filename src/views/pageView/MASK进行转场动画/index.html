@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>MASK 使用</title>
+    <style>
+        @import "compass/css3";
+        /* MASK 玻璃磨砂质感 */
+      body{
+        margin: 0;
+        height: auto;
+        display: grid;
+        place-content: center;
+        }
+        .prew{
+            display: block;
+            width: 800px;
+        }
+        .wrap{
+            position: relative;
+            overflow:hidden;
+        }
+        .wrap::before{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E %3Cpath d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z'%3E%3C/path%3E %3C/svg%3E"), linear-gradient(red, red);
+            -webkit-mask-size: 100px, 100%;
+            -webkit-mask-repeat: no-repeat;
+            -webkit-mask-position: calc(var(--x, .5) * 100% + var(--x, .5) * 100px - 50px )  calc(var(--y, .5) * 100% + var(--y, .5) * 100px - 50px ), 0;
+            -webkit-mask-composite: xor; 
+            mask-composite: exclude;
+            background: rgba(0,0,0,.1);
+            backdrop-filter: blur(10px)
+        }
+        
+        /* MASK 图片重叠 */
+        .overlap {
+            width: 100%;
+            height: 500px;
+            position: relative;
+            background: url('./原神4K壁纸.png') no-repeat;
+            background-size:100% 100%;
+        }
+        .overlap::before {
+            position: absolute;
+            content: "";
+            top: 0;left: 0; right: 0;bottom: 0;
+            background: url('./雪4K壁纸.png') no-repeat;
+            background-size:100% 100%;
+            /* -webkit-mask: linear-gradient(45deg, #000 50%, transparent 50%); */
+            -webkit-mask: linear-gradient(45deg, #000 30%, transparent 70%);
+        }
+
+        /* MASK 进行转场动画 */
+        .gradient{
+            width: 100%;
+            height: 500px;
+            background: url('./动漫4K壁纸.png') no-repeat;
+            background-size:100% 100%;
+            position: relative;
+        }
+        .gradient::before{
+            position: absolute;
+            content: "";
+            top: 0;left: 0; right: 0;bottom: 0;
+            background: url('./原神4K壁纸.png') no-repeat;
+            background-size:100% 100%;
+            animation: maskRotate 2s  steps(29) infinite;
+        }
+        @keyframes maskRotate {
+            1%{
+                -webkit-mask: linear-gradient(45deg, #000 1%, transparent 5%, transparent 1%);
+            }
+            25%{
+                -webkit-mask: linear-gradient(45deg, #000 1%, transparent 25%, transparent 1%);
+            }
+            50%{
+                -webkit-mask: linear-gradient(45deg, #000 1%, transparent 50%, transparent 1%);
+            }
+            75%{
+                -webkit-mask: linear-gradient(45deg, #000 1%, transparent 75%, transparent 1%);
+            }
+            100%{
+                -webkit-mask: linear-gradient(45deg, #000 1%, transparent 100%, transparent 0%);
+            }
+            /* @for $i from 0 through 100 {
+                #{$i}% {
+                    -webkit-mask: linear-gradient(45deg, #000 #{$i + '%'}, transparent #{$i + 5 + '%'}, transparent 1%);
+                }
+            } */
+        }
+
+        /* MASK 进行转场动画-逐帧动画 */
+        .mask{
+            width: 100%;
+            height: 500px;
+           
+            position: relative;
+        }
+        .img1{
+            width: 100%;
+            height: 100%;
+            background: url('./动漫4K壁纸.png') no-repeat left top;
+            background-size: cover;
+        }
+        .img2 {
+            position: absolute;
+            top: 0;left: 0;
+            width: 100%;
+            height: 500px;
+            /* background: url('https://img2020.cnblogs.com/blog/608782/202007/608782-20200706102517861-616339127.png') no-repeat; */
+            /* background-size: 3000% 100%; */
+            -webkit-mask: url('https://img2020.cnblogs.com/blog/608782/202007/608782-20200706102517861-616339127.png');
+            /* -webkit-mask-composite: xor;  */
+            /* -webkit-mask: url('https://media.prod.mdn.mozit.cloud/attachments/2016/03/03/12676/cef7251f571b727c87a4613cfb347bbc/star.svg'); */
+            -webkit-mask-size: 3000% 100%;
+            animation: maskMove 2s steps(30) infinite;
+        }
+        
+        .img2::before {
+            width: 100%;
+            height: 500px;
+            position: absolute;
+            top: 0;left: 0;
+            background: url('./原神4K壁纸.png') no-repeat;
+            background-size: cover;
+            /* background-size: 100% 100%; */
+        }
+        @keyframes maskMove {
+            from {
+                -webkit-mask-position: 0 0;
+                /* background-position: 0 0; */
+                /* -webkit-mask: linear-gradient(45deg, #000 1%, transparent 10%); */
+
+            }
+            to {
+                -webkit-mask-position: 100% 0;
+                /* background-position: 100% 0; */
+                /* -webkit-mask: linear-gradient(45deg, #000 1%, transparent 100%); */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>MASK 玻璃磨砂质感</div>
+    <div class="wrap" id="img">
+        <p>撒大嫂啥地方</p>
+        <img class="prew" src="https://tva1.sinaimg.cn/large/008i3skNgy1gubr2sbyqdj60xa0m6tey02.jpg">
+    </div>
+    <!-- <div>MASK 图片重叠</div>
+    <div class="overlap"></div> -->
+    <div>MASK 进行转场动画</div>
+    <!-- <div class="gradient"></div>
+    <div>MASK 进行转场动画-逐帧动画</div> -->
+    <div class="mask"> 
+        <div class="img1"> </div>
+        <div class="img2"> </div>
+    </div>
+</body>
+<script>
+   img.addEventListener('mousemove', (ev) => {
+    img.style.setProperty('--x', ev.offsetX / ev.target.offsetWidth);
+    img.style.setProperty('--y', ev.offsetY / ev.target.offsetHeight);
+})
+</script>
+</html>

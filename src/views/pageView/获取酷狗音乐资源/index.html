@@ -1,0 +1,136 @@
+
+<!-- saved from url=(0066)https://www.17sucai.com/preview/2160385/2021-08-22/home/index.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>获取酷狗音乐资源</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<script type="text/javascript" charset="utf-8" src="./jquery-3.1.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="./layui.js"></script><link id="layuicss-laydate" rel="stylesheet" href="./laydate.css" media="all"><link id="layuicss-layer" rel="stylesheet" href="./layer.css" media="all"><link id="layuicss-skincodecss" rel="stylesheet" href="./code.css" media="all">
+
+<link rel="stylesheet" href="./layui.css" media="all">
+
+<link rel="stylesheet" href="./style.css" media="all">
+
+</head>
+<body>
+
+<div class="wrap youbian" id="main_box">
+
+	<div class="nav">
+		<ul class=" menu-list">
+			<li class="layui-nav-li">
+				<h1 class="main-nav-a">获取酷狗音乐资源</h1>
+				<div class="main-n-div">
+					<div style="width:70%;margin-left: 40px;">
+						<input class="layui-input" id="name" type="text" placeholder="请输入歌曲名、歌手搜索">
+					</div>
+					<button type="button" class="layui-btn co main-nav-btn" id="search">搜索</button>
+				</div>
+			</li>
+	
+		</ul>
+	</div>
+	
+	<div class="load">
+		<div class="loader" title="2">
+			<svg version="1.1" id="loader-1" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+			<path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+				<animatetransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animatetransform>
+			</path>
+		</svg>
+			<div class="load-msg"> 加载中....</div>
+		</div>
+	</div>
+	
+	<script id="temp" type="text/html">
+		<table class="layui-table">
+			{{#  if(d.data.length != 0){ }}
+			<colgroup>
+				<col width="25%">
+				<col width="25%">
+				<col width="25%">
+				<col width="25%">
+			</colgroup>
+			<thead>
+			<tr>
+				<th>搜索名称</th>
+				<th>专辑</th>
+				<th>时长</th>
+				<th>操作</th>
+			</tr>
+			</thead>
+			{{#  } }}
+			<tbody>
+			{{#  layui.each(d.data, function(index, item){ }}
+			<tr>
+				<td>{{ item.FileName }}</td>
+				<td>{{ item.AlbumName }}</td>
+				<td>{{ d.format(item.Duration) }}</td>
+				<th>
+					<a class="layui-btn layui-btn-primary layui-btn-xs" data-num="{{ index }}" data-hash="{{ item.FileHash }}" AlbumID = "{{ item.AlbumID  }}" >播放</a>
+					<span class="layui-btn co layui-btn-xs">下载</span>
+				</th>
+			</tr>
+			{{#  }); }}
+			{{#  if(d.data.length === 0){ }}
+			<tr>
+				<td width="100%" style="text-align: center"> 暂无数据</td>
+			</tr>
+			{{#  } }}
+			</tbody>
+		</table>
+	</script>
+	<div class="apps">
+		<div id="app"></div>
+		<div id="page"></div>
+	</div>
+	<div class="bottom-div">
+		<!--播放进度条-->
+		<div class="play_bar">
+			<div class="progress" id="progress">
+				<div class="bar" style="background-color: #fff;"></div>
+				<div class="has_load" id="play_loading" style="-webkit-transform:translateX(0%);"></div>
+				<div class="has_play" id="play_on" style="-webkit-transform: translateX(0%); "><span style="" id="btn_pro"><i></i></span></div>
+			</div>
+			<p class="play_time"><time id="currentTime">00:00</time><time id="totalTime">00:00</time></p>
+		</div>
+		<div class="kognzhianniu">
+			<div class="name">
+				<div style="position: relative;height: inherit;">
+					<span class="song"><img id="singer-img"></span>
+					<h2 class="singer"><marquee id="audio_name" behavior="alternate" direction="left" scrollamount="2"></marquee></h2>
+				</div>
+	
+			</div>
+			<a href="javascript:;" class="btn_play" id="cover"><span></span><i></i></a>
+			<a href="javascript:;" class="btn_play play_left" id="play_left" title="上一首"><span></span><i></i></a>
+			<a href="javascript:;" class="btn_play play_right" id="play_right" title="下一首"><span></span><i></i></a>
+			<div class="vlue">
+				<div style="position: relative">
+					<div class="vlue-icon"><i class="v_o"></i></div>
+					<div class="range-volume"><input type="range" id="volume" min="0" max="1" step="0.01" value="0.5"></div>
+				</div>
+			</div>
+			<div class="klok">
+				<div style="position: relative">
+					<div class="layui-inline">
+						<label class="kllabel">歌词</label>
+						<div class="switch">
+							<input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox" checked="">
+							<label for="cmn-toggle-1"></label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="klok" style="left: 92%;">
+				<button class="loop">播放模式</button>
+			</div>
+		</div>
+		<div class="gradient_mask"></div>
+	</div>
+
+</div>
+
+<script type="text/javascript" charset="utf-8" src="./script.js"></script><div id="lrc" class="lrc"></div>
+</body></html>

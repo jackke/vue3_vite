@@ -1,0 +1,83 @@
+@import url("./common.css");
+a.button{
+	display: block;
+	float:left;
+	position: relative;
+	height: 25px;
+	width: 80px;
+	margin:0px 10px 18px 0px;
+	font-size: 12px /*"Helvetica Neue" Helvetica,Arial,sans-serif*/;
+	font-weight: bold;
+	line-height: 25px;
+	text-align: center;
+}
+
+
+a.button:before, a.button:after{
+	content:" ";
+	position: absolute;
+	left:-1px;
+	height:25px;
+	width: 80px;
+	bottom:-1px;
+	-webkit-border-radius: 0 0 3px 3px;
+	-moz-border-radius: 0 0 3px 3px;
+	border-radius: 0 0 3px 3px;
+}
+
+a.button:before{
+	height:23px;
+	bottom: -4px;
+	border-top:0;
+	-webkit-box-shadow: 0 1px 1px 0px #bfbfbf;
+	-moz-box-shadow: 0 1px 1px 0px #bfbfbf;
+	box-shadow: 0 1px 1px 0px #bfbfbf;
+}
+
+/****为了彰显按钮的金属特质，使用CSS3的特定义圆角效果****/
+.gray, .gray:hover{
+	color:#555;
+	border-bottom: 4px solid #b2b1b1;
+	background: #eee;
+}
+
+
+
+a.gray,a.gray:hover,a.gray:visited{
+	color:#555;
+	text-shadow: 0px 1px 0px #fafafa;
+	background: -webkit-linear-gradient(linear,left top,left bottom,form(#eee),to(#e2e2e2));
+	background: -moz-linear-gradient(top:#eee,#e2e2e2);
+	box-shadow: inset 1px 1px 0 #a5a5a5;
+}
+
+.gray:hover{
+	background:#e2e2e2;
+	background: -webkit-linear-gradient(linear,left top,left bottom,form(#eee),to(#e2e2e2));
+	background: -moz-linear-gradient(top:#eee,#e2e2e2);
+}
+
+.gray:before, .gray:after{
+	border:solid 1px #cbcbcb;
+	border-bottom:1px solid #a5a5a5;
+}
+a.button:active{
+	border:none;
+	bottom: -4px;
+	margin-bottom: 22px;
+	-webkit-box-shadow: 0 1px 1px #fff;
+	box-shadow: 1px 1px 0 #fff,inset 0 1px 1px rgba(0,0,0,0.3);
+}
+
+a.button:active:before,
+a.button:active:after{
+	border:none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow:none;
+	box-shadow: none;
+}
+
+.pink{
+	background: pink;
+	border-bottom: 4px solid #b2b1b1;
+}

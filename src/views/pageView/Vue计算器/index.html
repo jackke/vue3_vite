@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<!-- saved from url=(0091)https://www.17sucai.com/preview/1778895/2020-07-06/Vue%E8%AE%A1%E7%AE%97%E5%99%A8/demo.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拟态化Vue计算器</title>
+    
+    <style type="text/css">
+    /**
+    *EvinChan
+    *2020-07-06
+    */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #eeeeee;
+        }
+
+        .calculator {
+            --button-width: 80px;
+            --button-height: 80px;
+
+            display: grid;
+            /*定义模版*/
+            grid-template-areas: 
+                "result result result result"
+                "ac plus-minus percent divide"
+                "number-7 number-8 number-9 multiply"
+                "number-4 number-5 number-6 subtract"
+                "number-1 number-2 number-3 add"
+                "number-0 number-0 dot equal";
+            grid-template-columns: repeat(4, var(--button-width));
+            grid-template-rows: repeat(6, var(--button-height));
+            /*定义阴影*/
+            box-shadow: -8px -8px 16px -10px rgba(255, 255, 255, 1),
+                8px 8px 16px -10px rgba(0, 0, 0, .15);
+            padding: 24px;
+            border-radius: 20px;
+        }
+
+        /*定义按钮样式*/
+        .calculator button {
+            margin: 8px;
+            padding: 0;
+            border: 0;
+            display: block;
+            outline: none;
+            border-radius: calc(var(--button-height)/2);
+            font-size: 24px;
+            font-family: Helvetica;
+            font-weight: normal;
+            color: #999;
+            background: linear-gradient(135deg, rgba(230, 230, 230, 1) 0%, rgba(246, 246, 246, 1) 100%);
+            box-shadow: -4px -4px 10px -8px rgba(255, 255, 255, 1),
+                4px 4px 10px -8px rgba(0, 0, 0, .3);
+        }
+
+        .calculator button:active {
+            box-shadow: -4px -4px 10px -8px rgba(255, 255, 255, 1) inset,
+                4px 4px 10px -8px rgba(0, 0, 0, .3) inset;
+            transition: .3s;
+        }
+
+        .result {
+            width: 310px;
+            height: 80px;
+            text-align: right;
+            line-height: var(--button-height);
+            font-size: 48px;
+            font-family: Helvetica;
+            color: #666666;
+            background-color: rgb(224, 224, 224);
+            border-radius: 15px;
+            padding: 0 10px 0 0;
+            margin-bottom: 10px;
+        }
+        .changeResult{
+            font-size: 30px;
+        }
+        .changeResultSmall{
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="calculator">
+            <div class="result">{{equation}}</div> 
+            <button style="grid-area: ac / ac / ac / ac;">AC</button> 
+            <button style="grid-area: plus-minus / plus-minus / plus-minus / plus-minus;">±</button> 
+            <button style="grid-area: percent / percent / percent / percent;">%</button> 
+            <button style="grid-area: add / add / add / add;">+</button> 
+            <button style="grid-area: subtract / subtract / subtract / subtract;">-</button> 
+            <button style="grid-area: multiply / multiply / multiply / multiply;">×</button> 
+            <button style="grid-area: divide / divide / divide / divide;">÷</button> 
+            <button style="grid-area: equal / equal / equal / equal;">=</button>
+            <button style="grid-area: number-1 / number-1 / number-1 / number-1;">1</button> 
+            <button style="grid-area: number-2 / number-2 / number-2 / number-2;">2</button> 
+            <button style="grid-area: number-3 / number-3 / number-3 / number-3;">3</button> 
+            <button style="grid-area: number-4 / number-4 / number-4 / number-4;">4</button> 
+            <button style="grid-area: number-5 / number-5 / number-5 / number-5;">5</button> 
+            <button style="grid-area: number-6 / number-6 / number-6 / number-6;">6</button> 
+            <button style="grid-area: number-7 / number-7 / number-7 / number-7;">7</button> 
+            <button style="grid-area: number-8 / number-8 / number-8 / number-8;">8</button> 
+            <button style="grid-area: number-9 / number-9 / number-9 / number-9;">9</button> 
+            <button style="grid-area: number-0 / number-0 / number-0 / number-0;">0</button> 
+            <button style="grid-area: dot / dot / dot / dot;">.</button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="./vue.js"></script>	
+    <script type="text/javascript">
+        new Vue({
+            el: "#app",
+            data: {
+                equation: '0',
+                isDecimalAdded: false,//判断是否输入小数点，用来防止输入超过一个的小数点
+                isOperatorAdded: false,//判断是否点击加减乘除，防止点击超过一次运算符号
+                isStarted: false,//判断计算器是否开始输入数字，也会用于正负数、百分比计算时作出一些判断
+                isSmall:false,//判断结果框的内容过长的时候字符缩小
+                isTooSmall:false,//判断更小的时候
+            },
+            methods: {
+                //判断charracter是否为加减乘除
+                isOperator(character) {
+                    return ['+', '-', '×', '÷'].indexOf(character) > -1;
+                },
+                //点击加减乘除、数字、小数点的时候
+                append(character) {
+                    if (this.equation === '0' && !this.isOperator(character)) {//判断是否输入数字
+                        if (character === '.') {//判断是否输入小数点
+                            this.equation += '' + character;//如果输入的是0，则在后面拼接
+                            this.isDecimalAdded = true;
+                        } else {
+                            this.equation = '' + character;//如果不为0的，直接替换原来数字
+                        }
+                        this.isStarted = true;
+                        return;
+                    }
+                    if (!this.isOperator(character)) {//如果输入的是数字
+                        if (character === '.' && this.isDecimalAdded) {//只能输入一个小数点，如果遇到小数点则返回
+                            return
+                        }
+                        if (character === '.') {//如果输入小数点
+                            if (this.isOperatorAdded) {//如果在输入了运算符号的时候，输入小数点会自动加0在前面
+                                this.equation += '0';
+                            }
+                            this.isDecimalAdded = true;
+                            this.isOperatorAdded = true;
+                        } else {
+                            this.isOperatorAdded = false;
+                        }
+                        this.equation += '' + character;//拼接数字
+                        this.showResult();
+                    }
+                    if (this.isOperator(character) && !this.isOperatorAdded) {//当输入运算符号的时候，
+                        this.equation += '' + character;
+                        this.isDecimalAdded = false;
+                        this.isOperatorAdded = true;
+                        this.showResult();
+                    }
+                    this.showResult();
+
+                },
+                //点击等于符号的时候
+                calculate() {
+                    let result = this.equation.replace(new RegExp('×', 'g'), '*').replace(new RegExp('÷', 'g'), '/');
+                    this.equation = parseFloat(eval(result).toFixed(9)).toString();
+                    this.isDecimalAdded = false;
+                    this.isOperatorAdded = false;
+                    this.showResult();
+                },
+                //点击正负号的时候
+                calculateToggle() {
+                    if (this.isOperatorAdded || !this.isStarted) {
+                        return;
+                    }
+                    this.equation = this.equation + '* -1';
+                    this.calculate();
+
+                },
+                //点击百分号的时候
+                calculatePercentage() {
+                    if (this.isOperatorAdded || !this.isStarted) {
+                        return;
+                    }
+                    this.equation = this.equation + '* 0.01';
+                    this.calculate();
+                },
+                //点击清除符号的时候
+                clear() {
+                    this.equation = '0';
+                    this.isDecimalAdded = false;
+                    this.isOperatorAdded = false;
+                    this.isStarted = false;
+                    this.isSmall = false;
+                    this.isTooSmall = false;
+                },
+                //当结果框的显示问题
+                showResult(){
+                    //当输入内容宽度大于实际输入框宽度的时候，字体缩小适应输入框要求
+                    // console.log(this.equation.length);
+                    if(this.equation.length > 11){
+                        this.isSmall = true;
+                        if(this.equation.length >17){
+                            this.isSmall = false;
+                            this.isTooSmall = true;
+                            if(this.equation.length > 27){
+                                // this.equation = "无法显示";
+                                alert("已超出输入最大值，将强行执行内容清空操作");
+                                this.clear();
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+
+
+</body>
+</html>

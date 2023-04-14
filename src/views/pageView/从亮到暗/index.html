@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)https://www.17sucai.com/preview/1097306/2021-09-09/lj/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Light to Dark | Play with Gradient &amp; Mix-Blend-Mode</title>
+
+<link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+
+<div class="main">
+	<div class="blend">
+		<h1>从亮到暗</h1>
+	</div>
+	<div class="form_container">
+		<div class="formgroup">
+			<h2 id="titelColorOne">Color 1</h2>
+			<div class="description">R</div><input class="slider" type="range" min="0" max="255" step="1.0" value="255" id="one">
+			<span id="one_value">255</span>
+			<br>
+			<div class="description">G</div><input class="slider" type="range" min="0" max="255" step="1.0" value="255" id="two">
+			<span id="two_value">255</span>
+			<br>
+			<div class="description">B</div><input class="slider" type="range" min="0" max="255" step="1.0" value="255" id="three">
+			<span id="three_value">255</span>
+			<br>
+			<div class="description">A</div><input class="slider" type="range" min="0" max="1" step="0.1" value="0.2" id="opacity_one">
+			<span id="opacity_one_value">0.2</span>
+			<br>
+			<div class="description">Startpoint</div>
+			<input class="slider" type="range" min="0" max="100" step="1.0" value="0" id="start">
+			<span id="start_value">1</span>
+		</div>
+		<div class="formgroup">
+			<h2 id="titelColorTwo">Color 2</h2>
+			<div class="description">R</div><input class="slider" type="range" min="0" max="255" step="1.0" value="10" id="four">
+			<span id="four_value">10</span>
+			<br>
+			<div class="description">G</div><input class="slider" type="range" min="0" max="255" step="1.0" value="0" id="five">
+			<span id="five_value">0</span>
+			<br>
+			<div class="description">B</div><input class="slider" type="range" min="0" max="255" step="1.0" value="94" id="six">
+			<span id="six_value">94</span>
+			<br>
+			<div class="description">A</div><input class="slider" type="range" min="0" max="1" step="0.1" value="1" id="opacity_two">
+			<span id="opacity_two_value">1</span>
+			<br>
+			<div class="description">Endpoint</div><input class="slider" type="range" min="0" max="100" step="1.0" value="100" id="end">
+			<span id="end_value">0.2</span>
+		</div>
+		<div class="formgroup">
+			<h2>DEG &amp; Blend-Mode</h2>
+			<div class="description">DEG</div><input class="slider" type="range" min="0" max="360" step="1.0" value="90" id="deg">
+			<span id="deg_value">90</span>
+			<div class="description">Mix-Blend-Mode</div>
+			<select name="mix-blend" class="input" id="mixBlend">
+				<option value="normal">normal</option>
+				<option value="multiply">multiply</option>
+				<option value="screen">screen</option>
+				<option value="overlay">overlay</option>
+				<option value="darken">darken</option>
+				<option value="lighten">lighten</option>
+				<option value="color-dodge">color-dodge</option>
+				<option value="color-burn">color-burn</option>
+				<option value="hard-light">hard-light</option>
+				<option value="soft-light">soft-light</option>
+				<option value="difference">difference</option>
+				<option value="exclusion">exclusion</option>
+				<option value="hue">hue</option>
+				<option value="saturation">saturation</option>
+				<option value="color">color</option>
+				<option value="luminosity">luminosity</option>
+				<option value="initial">initial</option>
+				<option value="inherit">inherit</option>
+				<option value="unset">unset</option>
+			</select>
+
+			<details>
+				<summary>More</summary>
+				<br>
+				<div class="description">Font Color</div><input type="color" value="" id="colorSelect">
+				<br>
+				<div class="description">FontSize</div><input class="slider" type="range" min="0" max="10" step="0.25" value="3" id="fontSize">undefined</input>
+				<span id="font_value">3vw</span>
+				<div class="description">Transition</div>
+				<select name="transition" class="input" id="transition">
+					<option value="ease">ease</option>
+					<option value="linear">linear</option>
+					<option value="ease-in-out">ease-in-out</option>
+					<option value="ease-in">ease-in</option>
+					<option value="ease-out">ease-out</option>
+
+				</select>
+
+				<div class="description">Animation Speed</div><input class="slider" type="range" min="0.5" max="20" step="0.25" value="5" id="speed">
+				<span id="speed_value">5</span>
+				<br>
+				<div class="description">Backgorund Image Url</div><input type="url" value="img/fh.jpg" class="input" id="urlInput"><p></p>
+			</details>
+
+		</div>
+	</div>
+</div>
+
+<script src="./script.js"></script>
+
+
+
+</body></html>

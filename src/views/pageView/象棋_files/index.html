@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)https://www.17sucai.com/preview/2859/2021-09-13/%E8%B1%A1%E6%A3%8B/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="./common.css">
+		<link rel="stylesheet" type="text/css" href="./main.css">
+		<link rel="stylesheet" type="text/css" href="./qi.css">
+		<link rel="stylesheet" type="text/css" href="./btn.css">
+		<script src="./jquery-3.5.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		
+		<div id="main">
+			<div class="btnWrap">
+				<button id="reStartBtn">重新开始</button>
+				<!--button id="backBtn">悔一步</button-->
+			</div>
+			<div id="container2" style="box-shadow:#ccc 1px 1px 6px ;">
+				<canvas id="myCanvas" width="840" height="840"></canvas>
+			</div>
+			<div id="win_msg">测试信息</div>
+		</div>
+		<script type="text/javascript">
+			const canvas = document.getElementById("myCanvas");
+			//var canvas = $("#myCanvas");
+			const ctx = canvas.getContext("2d");
+			//线条的颜色
+			ctx.strokeStyle="#000";
+			//线条的宽度像素
+			ctx.lineWidth=1;
+			
+			const space = 60;//棋盘边界与画布边界的间距
+			const row_cell_num = 8;//每行格子数
+			const col_cell_num = 4;//每一方各有几行
+			const total_row = 10;//总行数
+			const total_col = 9;//总列数
+			const width = $("#container2").width() - space * 2; // 棋盘的宽度
+			const height = $("#container2").height() - space * 2; // 棋盘的高度
+			const cell_width = width / row_cell_num; // 每个格子的宽度
+			const cell_height = height / (total_row-1); // 每个格子的高度
+			const chess_size = cell_width / 2 - 2; //棋子的直径
+			
+			var game_status = 1;
+			var qi = "red";
+			var chess = new Array();
+			var step=0;//存储下棋步骤
+			var has_chess = false;
+			var is_win = false;
+			
+			var chessAndPos = {'x':-1,'y':-1,'color':qi};
+			
+			//定义红棋数组
+			var red_chess = [
+				{'x':0,'y':0,'color':'red','chess_type':'che','img':'./images/hongche.png','live_status':'live'},
+				{'x':1,'y':0,'color':'red','chess_type':'ma','img':'./images/hongma.png','live_status':'live'},
+				{'x':2,'y':0,'color':'red','chess_type':'xiang','img':'./images/hongxiang.png','live_status':'live'},
+				{'x':3,'y':0,'color':'red','chess_type':'shi','img':'./images/hongshi.png','live_status':'live'},
+				{'x':4,'y':0,'color':'red','chess_type':'boss','img':'./images/hongboss.png','live_status':'live'},
+				{'x':5,'y':0,'color':'red','chess_type':'shi','img':'./images/hongshi.png','live_status':'live'},
+				{'x':6,'y':0,'color':'red','chess_type':'xiang','img':'./images/hongxiang.png','live_status':'live'},
+				{'x':7,'y':0,'color':'red','chess_type':'ma','img':'./images/hongma.png','live_status':'live'},
+				{'x':8,'y':0,'color':'red','chess_type':'che','img':'./images/hongche.png','live_status':'live'},
+				//炮
+				{'x':1,'y':2,'color':'red','chess_type':'pao','img':'./images/hongpao.png','live_status':'live'},
+				{'x':7,'y':2,'color':'red','chess_type':'pao','img':'./images/hongpao.png','live_status':'live'},
+				//士兵
+				{'x':0,'y':3,'color':'red','chess_type':'soldier','img':'./images/hongbin.png','live_status':'live'},
+				{'x':2,'y':3,'color':'red','chess_type':'soldier','img':'./images/hongbin.png','live_status':'live'},
+				{'x':4,'y':3,'color':'red','chess_type':'soldier','img':'./images/hongbin.png','live_status':'live'},
+				{'x':6,'y':3,'color':'red','chess_type':'soldier','img':'./images/hongbin.png','live_status':'live'},
+				{'x':8,'y':3,'color':'red','chess_type':'soldier','img':'./images/hongbin.png','live_status':'live'}
+				
+			];
+			//黑棋
+			var black_chess = [
+				{'x':0,'y':9,'color':'black','chess_type':'che','img':'./images/heiche.png','live_status':'live'},
+				{'x':1,'y':9,'color':'black','chess_type':'ma','img':'./images/heima.png','live_status':'live'},
+				{'x':2,'y':9,'color':'black','chess_type':'xiang','img':'./images/heixiang.png','live_status':'live'},
+				{'x':3,'y':9,'color':'black','chess_type':'shi','img':'./images/heishi.png','live_status':'live'},
+				{'x':4,'y':9,'color':'black','chess_type':'boss','img':'./images/heiboss.png','live_status':'live'},
+				{'x':5,'y':9,'color':'black','chess_type':'shi','img':'./images/heishi.png','live_status':'live'},
+				{'x':6,'y':9,'color':'black','chess_type':'xiang','img':'./images/heixiang.png','live_status':'live'},
+				{'x':7,'y':9,'color':'black','chess_type':'ma','img':'./images/heima.png','live_status':'live'},
+				{'x':8,'y':9,'color':'black','chess_type':'che','img':'./images/heiche.png','live_status':'live'},
+				//炮
+				{'x':1,'y':7,'color':'black','chess_type':'pao','img':'./images/heipao.png','live_status':'live'},
+				{'x':7,'y':7,'color':'black','chess_type':'pao','img':'./images/heipao.png','live_status':'live'},
+				//士兵
+				{'x':0,'y':6,'color':'black','chess_type':'soldier','img':'./images/heibing.png','live_status':'live'},
+				{'x':2,'y':6,'color':'black','chess_type':'soldier','img':'./images/heibing.png','live_status':'live'},
+				{'x':4,'y':6,'color':'black','chess_type':'soldier','img':'./images/heibing.png','live_status':'live'},
+				{'x':6,'y':6,'color':'black','chess_type':'soldier','img':'./images/heibing.png','live_status':'live'},
+				{'x':8,'y':6,'color':'black','chess_type':'soldier','img':'./images/heibing.png','live_status':'live'}
+			];
+			
+			//初始化棋子数组
+			for(let i=0;i<total_row;i++){
+				chess.push([]);
+				for(let j=0;j<total_col;j++){
+					chess[i].push(0);
+				}
+			}
+			
+			//console.log(red_chess);
+			//将红棋存入棋盘
+			red_chess.forEach(item=>{
+				chess[item.y][item.x] = item;
+			});
+			
+			//将黑棋存入棋盘
+			black_chess.forEach(item=>{
+				chess[item.y][item.x] = item;
+			});
+			
+			//console.log("-----------");
+			//console.log(chess);
+			//console.log(chess[0][0]);
+			//console.log(chess[0][0].chess_type);
+			//console.log("-----------");
+			//console.log(red_chess);
+			//console.log(black_chess);
+			init();
+			
+			function init(){
+				draw();
+			}
+			
+			
+			//重新开始
+			function rePlay(){
+				
+				game_status = 1;
+				qi = "red";
+				chess = new Array();
+				step=0;//存储下棋步骤
+				has_chess = false;
+				is_win = false;
+				
+				chessAndPos = {'x':-1,'y':-1,'color':qi};
+				
+				//定义红棋数组
+				red_chess = [
+					{'x':0,'y':0,'color':'red','chess_type':'che','img':'./images/hongche.png','live_status':'live'},
+					{'x':1,'y':0,'color':'red','chess_type':'ma','img':'./images/hongma.png','live_status':'live'},
+					{'x':2,'y':0,'color':'red','chess_type':'xiang','img':'./images/hongxiang.png','live_status':'live'},
+					{'x':3,'y':0,'color':'red','chess_type':'shi','img':'./images/hongshi.png','live_status':'live'},
+					{'x':4,'y':0,'color':'red','chess_type':'boss','img':'./images/hongboss.png','live_status':'live'},
+					{'x':5,'y':0,'color':'red','chess_type':'shi','img':'./images/hongshi.png','live_status':'live'},
+					{'x':6,'y':0,'color':'red','chess_type':'xiang','img':'./images/hongxiang.png','live_status':'live'},
+					{'x':7,'y':0,'color':'red','chess_type':'ma','img':'./images/hongma.png','live_status':'live'},
+					{'x':8,'y':0,'color':'red','chess_type':'che','img':'./images/hongche.png','live_status':'live'},
+					//炮
+					{'x':1,'y':2,'color':'red','chess_type':'pao','img':'./images/hongpao.png','live_status':'live'},
+					{'x':7,'y':2,'color':'red','chess_type':'pao','img':'./images/hongpao.png','live_status':'live'},
+					//士兵
+					{'x':0,'y':3,'color':'red','chess_type':'soldier','img':'./images/hongbin.png','live_status':'live'},
+					{'x':2,'y':3,'color':'red','chess_type':'soldier','img':'./images/hongbin.png','live_status':'live'},
+					{'x':4,'y':3,'color':'red','chess_type':'soldier','img':'./images/hongbin.png','live_status':'live'},
+					{'x':6,'y':3,'color':'red','chess_type':'soldier','img':'./images/hongbin.png','live_status':'live'},
+					{'x':8,'y':3,'color':'red','chess_type':'soldier','img':'./images/hongbin.png','live_status':'live'}
+					
+				];
+				//黑棋
+				black_chess = [
+					{'x':0,'y':9,'color':'black','chess_type':'che','img':'./images/heiche.png','live_status':'live'},
+					{'x':1,'y':9,'color':'black','chess_type':'ma','img':'./images/heima.png','live_status':'live'},
+					{'x':2,'y':9,'color':'black','chess_type':'xiang','img':'./images/heixiang.png','live_status':'live'},
+					{'x':3,'y':9,'color':'black','chess_type':'shi','img':'./images/heishi.png','live_status':'live'},
+					{'x':4,'y':9,'color':'black','chess_type':'boss','img':'./images/heiboss.png','live_status':'live'},
+					{'x':5,'y':9,'color':'black','chess_type':'shi','img':'./images/heishi.png','live_status':'live'},
+					{'x':6,'y':9,'color':'black','chess_type':'xiang','img':'./images/heixiang.png','live_status':'live'},
+					{'x':7,'y':9,'color':'black','chess_type':'ma','img':'./images/heima.png','live_status':'live'},
+					{'x':8,'y':9,'color':'black','chess_type':'che','img':'./images/heiche.png','live_status':'live'},
+					//炮
+					{'x':1,'y':7,'color':'black','chess_type':'pao','img':'./images/heipao.png','live_status':'live'},
+					{'x':7,'y':7,'color':'black','chess_type':'pao','img':'./images/heipao.png','live_status':'live'},
+					//士兵
+					{'x':0,'y':6,'color':'black','chess_type':'soldier','img':'./images/heibing.png','live_status':'live'},
+					{'x':2,'y':6,'color':'black','chess_type':'soldier','img':'./images/heibing.png','live_status':'live'},
+					{'x':4,'y':6,'color':'black','chess_type':'soldier','img':'./images/heibing.png','live_status':'live'},
+					{'x':6,'y':6,'color':'black','chess_type':'soldier','img':'./images/heibing.png','live_status':'live'},
+					{'x':8,'y':6,'color':'black','chess_type':'soldier','img':'./images/heibing.png','live_status':'live'}
+				];
+				
+				//初始化棋子数组
+				for(let i=0;i<total_row;i++){
+					chess.push([]);
+					for(let j=0;j<total_col;j++){
+						chess[i].push(0);
+					}
+				}
+				
+				//console.log(red_chess);
+				//将红棋存入棋盘
+				red_chess.forEach(item=>{
+					chess[item.y][item.x] = item;
+				});
+				
+				//将黑棋存入棋盘
+				black_chess.forEach(item=>{
+					chess[item.y][item.x] = item;
+				});
+				init();
+			}
+			
+			
+			/**
+			 * 绘制棋盘
+			 */
+			function draw(){
+				
+				//重新绘制棋盘跟棋子.
+				canvas.setAttribute("height",$("#container2").height());
+				//画横线
+				let endx = width + space;
+				let endy = height + space;
+				for(let i=0;i<total_row+1;i++){
+					let y = i * cell_height + space;
+					//console.log(y);
+					ctx.beginPath();
+					ctx.lineTo(space, y);
+					ctx.lineTo(endx, y);
+					ctx.stroke();
+				}
+				
+				ctx.beginPath();
+				ctx.lineTo(space, space);
+				ctx.lineTo(space, endy);
+				ctx.stroke();
+				
+				ctx.beginPath();
+				ctx.lineTo(endx, space);
+				ctx.lineTo(endx, endy);
+				ctx.stroke();
+				
+				var red_start_x = space + cell_width;
+				var red_start_y = space;
+				var red_end_y = red_start_y + cell_height * 4;
+				
+				for (let i=0;i<total_col-1;i++){
+					let x = i * cell_width + space;
+					//console.log(x);
+					ctx.beginPath();
+					ctx.lineTo(x, space);
+					ctx.lineTo(x, red_end_y);
+					ctx.stroke();
+				}
+				
+				
+				var black_start_x = space + cell_width;
+				var black_start_y = space + cell_height * 5;
+				var black_end_y = black_start_y + cell_height * 4;
+				
+				for (let i=0;i<total_col-1;i++){
+					let x = i * cell_width + space;
+					//console.log(x);
+					ctx.beginPath();
+					ctx.lineTo(x, black_start_y);
+					ctx.lineTo(x, endy);
+					ctx.stroke();
+				}
+				
+				//(3, 3)(5, 2) (5,0)(3,2) 上面米字格
+				ctx.beginPath();
+				ctx.lineTo(3 * cell_width + space, space);
+				ctx.lineTo(5 * cell_width + space, 2*cell_height + space);
+				ctx.stroke();
+				ctx.beginPath();
+				ctx.lineTo(5 * cell_width + space, space);
+				ctx.lineTo(3 * cell_width + space, 2*cell_height + space);
+				ctx.stroke();
+				
+				//下面米字格
+				ctx.beginPath();
+				ctx.lineTo(3 * cell_width + space, endy);
+				ctx.lineTo(5 * cell_width + space, 7*cell_height + space);
+				ctx.stroke();
+				ctx.beginPath();
+				ctx.lineTo(5 * cell_width + space, endy);
+				ctx.lineTo(3 * cell_width + space, 7*cell_height + space);
+				ctx.stroke();
+				
+				//（1,2）炮兵1
+				ctx.lineWidth = 2;
+				var tip_width = cell_width / 5;
+				var tip_space = cell_width / 10;
+				//画出炮兵的位置
+				for(let i=1;i<=7;){
+					
+					for(let j=2;j<=7;){
+						
+						//第一个直角
+						ctx.beginPath();
+						ctx.lineTo(i * cell_width + space - tip_width - tip_space , j * cell_height + space - tip_space);
+						ctx.lineTo(i * cell_width + space - tip_space , j * cell_height + space - tip_space);
+						ctx.lineTo(i * cell_width + space - tip_space , j * cell_height + space - tip_space - tip_width);
+						ctx.stroke();
+						
+						//第2个直角
+						ctx.beginPath();
+						ctx.lineTo(i * cell_width + space - tip_width - tip_space , j * cell_height + space + tip_space);
+						ctx.lineTo(i * cell_width + space - tip_space , j * cell_height + space + tip_space);
+						ctx.lineTo(i * cell_width + space - tip_space , j * cell_height + space + tip_space + tip_width);
+						ctx.stroke();
+						
+						//第3个直角
+						ctx.beginPath();
+						ctx.lineTo(i * cell_width + space + tip_space ,j * cell_height + space - tip_space - tip_width);
+						ctx.lineTo(i * cell_width + space + tip_space , j * cell_height + space - tip_space);
+						ctx.lineTo(i * cell_width + space + tip_space + tip_width , j * cell_height + space - tip_space);
+						ctx.stroke();
+						
+						//第四个直角
+						ctx.beginPath();
+						ctx.lineTo(i * cell_width + space + tip_space ,j * cell_height + space + tip_space + tip_width);
+						ctx.lineTo(i * cell_width + space + tip_space , j * cell_height + space + tip_space);
+						ctx.lineTo(i * cell_width + space + tip_space + tip_width , j * cell_height + space + tip_space);
+						ctx.stroke();
+						
+						j += 5;
+					}
+					
+					i+=6;
+				}
+				
+				
+				//画出兵的位置
+				for(let i=0;i<5;i++){
+					for(let j=3;j<=6;){
+						
+						if(i>0){
+							//第一个直角
+							ctx.beginPath();
+							ctx.lineTo((2*i) * cell_width + space - tip_width - tip_space , j * cell_height + space - tip_space);
+							ctx.lineTo((2*i) * cell_width + space - tip_space , j * cell_height + space - tip_space);
+							ctx.lineTo((2*i) * cell_width + space - tip_space , j * cell_height + space - tip_space - tip_width);
+							ctx.stroke();
+							
+							//第2个直角
+							ctx.beginPath();
+							ctx.lineTo((2*i) * cell_width + space - tip_width - tip_space , j * cell_height + space + tip_space);
+							ctx.lineTo((2*i) * cell_width + space - tip_space , j * cell_height + space + tip_space);
+							ctx.lineTo((2*i) * cell_width + space - tip_space , j * cell_height + space + tip_space + tip_width);
+							ctx.stroke();
+						}
+						if(i<4){
+							//第3个直角
+							ctx.beginPath();
+							ctx.lineTo((2*i) * cell_width + space + tip_space ,j * cell_height + space - tip_space - tip_width);
+							ctx.lineTo((2*i) * cell_width + space + tip_space , j * cell_height + space - tip_space);
+							ctx.lineTo((2*i) * cell_width + space + tip_space + tip_width , j * cell_height + space - tip_space);
+							ctx.stroke();
+							
+							
+							//第四个直角
+							ctx.beginPath();
+							ctx.lineTo((2*i) * cell_width + space + tip_space ,j * cell_height + space + tip_space + tip_width);
+							ctx.lineTo((2*i) * cell_width + space + tip_space , j * cell_height + space + tip_space);
+							ctx.lineTo((2*i) * cell_width + space + tip_space + tip_width , j * cell_height + space + tip_space);
+							ctx.stroke();
+						}
+						j += 3;
+					}
+				}
+				
+				
+				//显示棋子
+				/*red_chess.forEach(item=>{
+					var img = new Image();
+					if(item.img != ""){
+						let cx = item.x * cell_width + space / 4; //四分之一
+						let cy = item.y * cell_height + space / 4; // 四分之一
+						img.onload = function(){
+							ctx.drawImage(img,cx + cell_width*0.05, cy+ cell_width*0.05, cell_width*0.9, cell_width*0.9);
+						};
+						img.src = item.img;
+					}
+				});
+				
+				//显示棋子
+				black_chess.forEach(item=>{
+					var img = new Image();
+					if(item.img != ""){
+						let cx = item.x * cell_width + space / 4; //四分之一
+						let cy = item.y * cell_height + space / 4; // 四分之一
+						img.onload = function(){
+							ctx.drawImage(img,cx + cell_width*0.05, cy+ cell_width*0.05, cell_width*0.9, cell_width*0.9);
+						};
+						img.src = item.img;
+					}
+				});*/
+				
+				chess.forEach(item=>{
+					//console.log(item);
+					item.forEach(row=>{
+						//console.log(row);
+						if(row != 0){
+							var img = new Image();
+							if(row.img != ""){
+								let cx = row.x * cell_width + space / 4; //四分之一
+								let cy = row.y * cell_height + space / 4; // 四分之一
+								img.onload = function(){
+									ctx.drawImage(img,cx + cell_width*0.05, cy+ cell_width*0.05, cell_width*0.9, cell_width*0.9);
+								};
+								img.src = row.img;
+							}
+						}
+					});
+					
+				});
+				
+				if(is_win){
+					let msg = game_status==2?"红棋赢了":"黑棋赢了";
+					ctx.beginPath();
+					ctx.fillStyle="red";
+					ctx.font="48px '微软雅黑'";
+					ctx.textAlign="center";
+					ctx.fillText(msg,row_cell_num/2*cell_width + space,col_cell_num/2*cell_height + space);
+					ctx.restore();
+					ctx.closePath();
+				}
+				
+			}
+			
+			
+			/**
+			 * 判断数组a是否存在数组b中
+			 * @param {Object} a
+			 * @param {Object} b
+			 */
+			function isContained(a, b){
+				for(let i=0;i<b.length; i ++){
+					let tmp = 0;
+					for(let j=0;j<b[i].length;j++){
+						if(a[j] == b[i][j]){
+							tmp ++;
+						}
+					}
+					//console.log(tmp, a.length);
+					if (tmp == a.length){
+						return true;
+					}
+					
+				}
+				return false;
+			}
+			
+			/**
+			 * 找到棋子的位置
+			 * @param 棋子所在X坐标 x
+			 * @param 棋子所在Y坐标 y
+			 * @param 整个棋盘数组 chess_arr
+			 */
+			function findChessPos(x, y, chess_arr){
+				let pos = -1
+				for(let i=0;i<chess_arr.length;i++){
+					if(chess_arr[i].x == x && chess_arr[i].y == y){
+						pos = i;
+					}
+				}
+				return pos;
+			}
+			
+			/**
+			 * 是否过河了
+			 * @param 落子处或者棋子x坐标 x
+			 * @param 落子处或者棋子y坐标 y
+			 * @param {Object} color
+			 */
+			function isPassRiver(x, y, color){
+				let isPass = false;
+				//如果是红方
+				if(color=="red"){
+					if(y > 4){
+						isPass = true;
+					}
+				}else if(color=="black"){
+					if(y < 5){
+						isPass = true;
+					}
+				}
+				
+				return isPass;
+			}
+			
+			
+			
+			/**
+			 * @param 落子前坐标点 ox
+			 * @param 落子前坐标点 oy
+			 * @param 落子坐标点 nx
+			 * @param 落子坐标点 ny
+			 * @param 当前执棋颜色 color
+			 */
+			function update_chess(ox, oy, nx, ny, color){
+				
+				let curr_chess = color=="red"?red_chess:black_chess;
+				let pos = findChessPos(ox, oy, curr_chess);
+				
+				// 更新红黑棋子的信息
+				if(color == "red"){
+					red_chess[pos].x = nx;
+					red_chess[pos].y = ny;
+				}else if(color == "black"){
+					black_chess[pos].x = nx;
+					black_chess[pos].y = ny;
+				}
+				
+				//如果移动的位置 是不同颜色的棋子 那么 杀死该棋子 设置该棋子死活状态
+				if(chess[ny][nx].color != color){
+					curr_chess = chess[ny][nx].color=="red"?red_chess:black_chess;
+					pos = findChessPos(nx, ny, curr_chess);
+					//console.log(chess[ny][nx]);
+					// 更新红黑棋子的状态（死活）
+					if(chess[ny][nx].color == "red"){
+						red_chess[pos].live_status = 'die';
+						if(red_chess[pos].chess_type == "boss"){
+							game_status = 3;
+							is_win = true;
+						}
+						//console.log(red_chess[pos]);
+					}else if(chess[ny][nx].color == "black"){
+						black_chess[pos].live_status = 'die';
+						if(black_chess[pos].chess_type == "boss"){
+							is_win = true;
+							game_status = 2;
+						}
+						//console.log(black_chess[pos]);
+					}
+				}
+				
+				//更新棋盘信息
+				chess[oy][ox].x = nx;
+				chess[oy][ox].y = ny;
+				chess[ny][nx] = chess[oy][ox];
+				chess[oy][ox] = 0;
+				
+				
+				//检测是否移动了棋子, 如果移动了 就更改执棋者
+				//console.log(nx-oy);
+				if(nx-ox != 0 || ny-oy != 0){
+					qi=qi=="red"?"black":"red";
+				}
+				
+				let msg = "";
+				
+				draw();//刷新画布
+				
+				//console.log(qi);
+			}
+			
+			
+			/**
+			 * 检查行棋路线上是否有棋, 如果有， 返回棋子数量
+			 * @param {Object} x
+			 * @param {Object} y
+			 * @param {Object} c_chess
+			 */
+			function checkHasChess(x, y, mx, my, move_dir, c_chess){
+				let move_distance_x = mx - x; //x坐标移动距离
+				let move_distance_y = my - y; //y坐标移动距离
+				let num = 0;
+				let dx = x;
+				let dy = y;
+				//console.log("dx1, dy1", dx, dy);
+				while(true){
+					dx += move_dir[0];
+					dy += move_dir[1];
+					
+					//console.log("dx, dy", dx, dy);
+					//console.log("c_chess["+dy+"]["+dx+"]", c_chess[dy][dx]);
+					
+					if(dx < 0 || (move_dir[0] > 0 && dx >= mx) || (move_dir[0] < 0 && dx <= mx)  || dy < 0 || (move_dir[1] > 0 && dy >= my) || (move_dir[1] < 0 && dy <= my)){
+						break;
+					}
+					
+					if(c_chess[dy][dx] != 0){
+						num += 1;
+					}
+					
+				}
+				
+				return num;
+				
+			}			
+			
+			
+			
+			/**
+			 * 移动马
+			 * @param 当前x坐标 cx
+			 * @param 当前y坐标 cy
+			 * @param 移动后x坐标 mx
+			 * @param 移动后y坐标 my
+			 */
+			function moveHorse(cx, cy, mx, my){
+				
+				//马能够移动的方向坐标
+				let canMoveDirect = [
+					[1, 2],[-1, 2],[-1, -2],[1, -2],
+					[2, 1],[-2, 1],[2, -1],[-2, -1]
+				];
+				
+				let move_distance_x = mx - cx; //x坐标移动距离
+				let move_distance_y = my - cy; //y坐标移动距离
+				let move_dir = [move_distance_x, move_distance_y];
+				
+				//console.log("test");
+				//console.log(move_dir);
+				//console.log(isContained(move_dir, canMoveDirect));
+				if(!isContained(move_dir, canMoveDirect) || mx < 0 || my < 0 || mx > total_col-1 || my > total_row-1){
+					alert("不能移动到此处");
+					return;
+				}
+				//console.log(move_dir);
+				//横向行棋的时候 判断是否蹩脚
+				if(move_distance_y == 1 || move_distance_y == -1){
+					if(move_distance_x == 2){
+						// 查看左右两边是否有棋
+						if(chess[cy][cx + 1] != 0){
+							//alert("不能移动到此处");
+							return;
+						}
+						
+					}else{
+						// 查看左右两边是否有棋
+						if(chess[cy][cx - 1] != 0){
+							//alert("不能移动到此处");
+							return;
+						}
+					}
+					
+				}else if(move_distance_y == 2){
+					if(chess[cy + move_distance_y - 1][cx] != 0){
+						//alert("不能移动到此处");
+						return;
+					}
+				} else if(move_distance_y == -2){
+					if(chess[cy + move_distance_y + 1][cx] != 0){
+						//alert("不能移动到此处");
+						return;
+					}
+					
+				}
+				
+				/* let curr_chess = qi=="red"?red_chess:black_chess;
+				let pos = findChessPos(cx, cy, curr_chess); */
+				
+				/* console.log(pos);
+				console.log("curr_chess[pos].x",curr_chess[pos].x);
+				console.log(red_chess[1].x); */
+				
+				update_chess(cx, cy, mx, my, qi);
+				//console.log(black_chess);
+				//console.log("console.log(chess[cy][cx])",chess[cy][cx]);
+				//console.log("console.log(chess[my][mx])",chess[my][mx]);
+				//chessAndPos.x = -1;
+				//chessAndPos.y = -1;
+				
+			}
+			
+			/**
+			 * 移动炮
+			 * @param clientX cx
+			 * @param clientY cy
+			 * @param moveX mx
+			 * @param moveY my
+			 */
+			function movePao(cx, cy, mx, my){
+				//炮能够移动的方向坐标
+				let canMoveDirect = [
+					[-1, 0],[0, 1], [1, 0],[0, -1]
+				];
+				
+				let move_distance_x = mx - cx; //x坐标移动距离
+				let move_distance_y = my - cy; //y坐标移动距离
+				let dx = move_distance_x<0?-1:move_distance_x==0?0:1;
+				let dy = move_distance_y<0?-1:move_distance_y==0?0:1;
+				
+				let move_dir = [dx, dy];
+				
+				//console.log("move_distance_x", move_distance_x, move_distance_y);
+				//console.log(move_dir);
+				//console.log(isContained(move_dir, canMoveDirect));
+				if(!isContained(move_dir, canMoveDirect) || mx < 0 || my < 0 || mx > total_col-1 || my > total_row-1){
+					alert("不能移动到此处");
+					return;
+				}
+				
+				var line_num = checkHasChess(cx, cy, mx, my, move_dir, chess);
+				console.log("line_num", line_num);
+				
+				//落子点是否有棋子
+				if(chess[my][mx] == 0){
+					if(line_num == 0){
+						update_chess(cx, cy, mx, my, qi);
+					}
+				}else{
+					//如果有棋子 且 只有一颗 且 不是同色
+					console.log(chess[my][mx]);
+					if(line_num == 1 && qi != chess[my][mx].color){
+						update_chess(cx, cy, mx, my, qi);
+					}
+					
+				}
+				
+				
+			}
+			
+			/**
+			 * 移动炮
+			 * @param clientX cx
+			 * @param clientY cy
+			 * @param moveX mx
+			 * @param moveY my
+			 */
+			function moveCar(cx, cy, mx, my){
+				//车能够移动的方向坐标
+				let canMoveDirect = [
+					[-1, 0],[0, 1], [1, 0],[0, -1]
+				];
+				
+				let move_distance_x = mx - cx; //x坐标移动距离
+				let move_distance_y = my - cy; //y坐标移动距离
+				let dx = move_distance_x<0?-1:move_distance_x==0?0:1;
+				let dy = move_distance_y<0?-1:move_distance_y==0?0:1;
+				
+				let move_dir = [dx, dy];
+				
+				//console.log("move_distance_x", move_distance_x, move_distance_y);
+				//console.log(move_dir);
+				//console.log(isContained(move_dir, canMoveDirect));
+				if(!isContained(move_dir, canMoveDirect) || mx < 0 || my < 0 || mx > total_col-1 || my > total_row-1){
+					alert("不能移动到此处");
+					return;
+				}
+				
+				var line_num = checkHasChess(cx, cy, mx, my, move_dir, chess);
+				console.log("line_num", line_num);
+				
+				//落子点是否有棋子
+				if(chess[my][mx] == 0){
+					if(line_num == 0){
+						update_chess(cx, cy, mx, my, qi);
+					}
+				}else{
+					//如果有棋子 且 只有一颗 且 不是同色
+					//console.log(chess[my][mx]);
+					if(line_num == 0 && qi != chess[my][mx].color){
+						update_chess(cx, cy, mx, my, qi);
+					}
+					
+				}
+			}
+			
+			/**
+			 * 移动象
+			 * @param clientX cx
+			 * @param clientY cy
+			 * @param moveX mx
+			 * @param moveY my
+			 */
+			function moveXiang(cx, cy, mx, my){
+				//象能够移动的方向坐标（田字格） x y 每次增加位移量均为2个单位 正负表示移动方向
+				let canMoveDirect = [
+					[-2, -2],[2, 2], [-2, 2],[2, -2]
+				];
+				
+				let move_distance_x = mx - cx; //x坐标移动距离
+				let move_distance_y = my - cy; //y坐标移动距离
+				
+				let dx = move_distance_x < 0 ? -2 : move_distance_x == 0 ? 0 : 2;
+				let dy = move_distance_y < 0 ? -2 : move_distance_y == 0 ? 0 : 2;
+				
+				let move_dir = [move_distance_x, move_distance_y];
+				
+				console.log(move_dir);
+				if(!isContained(move_dir, canMoveDirect) || mx < 0 || my < 0 || mx > total_col-1 || my > total_row-1){
+					alert("不能移动到此处");
+					return;
+				}
+				
+				//判断落子处是否过河了、
+				if(isPassRiver(mx, my, qi)){
+					console.log("不能过河");
+					return;
+				}
+				
+				
+				//移动连线中是否有棋子阻挡
+				if(move_distance_x < 0){
+					if(move_distance_y < 0){
+						if(chess[cy-1][cx-1] != 0){
+							console.log("有棋子阻挡");
+							return;
+						}
+					}else{
+						if(chess[cy+1][cx-1] != 0){
+							console.log("有棋子阻挡");
+							return;
+						}
+					}
+					
+				}else{
+					if(move_distance_y < 0){
+						if(chess[cy-1][cx+1] != 0){
+							console.log("有棋子阻挡");
+							return;
+						}
+					}else{
+						if(chess[cy+1][cx+1] != 0){
+							console.log("有棋子阻挡");
+							return;
+						}
+					}
+				}
+				
+				
+				update_chess(cx, cy, mx, my, qi);
+				
+				console.log(chess);
+			}
+			
+			
+			/**
+			 * 移动士
+			 * @param clientX cx
+			 * @param clientY cy
+			 * @param moveX mx
+			 * @param moveY my
+			 */
+			function moveShi(cx, cy, mx, my){
+				//士能够移动的方向坐标
+				let canMoveDirect = [
+					[-1, 1],[1, 1], [1, -1],[-1, -1]
+				];
+				
+				let move_distance_x = mx - cx; //x坐标移动距离
+				let move_distance_y = my - cy; //y坐标移动距离
+				let dx = move_distance_x<0?-1:move_distance_x==0?0:1;
+				let dy = move_distance_y<0?-1:move_distance_y==0?0:1;
+				
+				let move_dir = [dx, dy];
+				
+				if(!isContained(move_dir, canMoveDirect) || mx < 0 || my < 0 || mx > total_col-1 || my > total_row-1){
+					alert("不能移动到此处");
+					return;
+				}
+				
+				if(qi == "red"){
+					
+					console.log(mx, my);
+					if(mx < 3 || mx > 5 || my >2){
+						console.log("不能移动到此处");
+						return;
+					}
+				}else{
+					console.log(mx, my);
+					if(mx < 3 || mx > 5 || my < 7){
+						console.log("不能移动到此处");
+						return;
+					}
+				}
+				update_chess(cx, cy, mx, my, qi);
+				
+			}
+			
+			
+			/**
+			 * 移动帅
+			 * @param clientX cx
+			 * @param clientY cy
+			 * @param moveX mx
+			 * @param moveY my
+			 */
+			function moveBoss(cx, cy, mx, my){
+				//帅能够移动的方向坐标
+				let canMoveDirect = [
+					[0, 1],[0, -1], [-1, 0],[1, 0]
+				];
+				
+				let move_distance_x = mx - cx; //x坐标移动距离
+				let move_distance_y = my - cy; //y坐标移动距离
+				let dx = move_distance_x<0?-1:move_distance_x==0?0:1;
+				let dy = move_distance_y<0?-1:move_distance_y==0?0:1;
+				
+				let move_dir = [dx, dy];
+				//console.log("total_row, total_col", total_row, total_col);
+				if(!isContained(move_dir, canMoveDirect) || mx < 0 || my < 0 || mx > total_col-1 || my > total_row-1){
+					alert("不能移动到此处");
+					return;
+				}
+				
+				let check_boss = checkHasBoss(cx, cy, mx, total_row-1,move_dir, chess);
+				console.log("check_boss, ", check_boss, "my", my);
+				if(check_boss.num == 1 && check_boss.has_boss && my == check_boss.boss_y){
+					my = check_boss.boss_y;
+					//console.log("my", my);
+				}else{
+					//不能移出田字格
+					if(qi == "red"){
+						console.log("red mx, my", mx, my);
+						if(mx < 3 || mx > 5 || my >2 || !isContained([move_distance_x, move_distance_y], canMoveDirect)){
+							console.log("不能移动到此处");
+							return;
+						}
+					}else{
+						//console.log(mx, my);
+						if(mx < 3 || mx > 5 || my < 7 || !isContained([move_distance_x, move_distance_y], canMoveDirect)){
+							console.log("不能移动到此处");
+							return;
+						}
+					}
+				}
+				update_chess(cx, cy, mx, my, qi);
+			}
+			
+			/**
+			 * 检查行棋路线上是否有棋, 如果有， 返回棋子数量
+			 * @param {Object} x
+			 * @param {Object} y
+			 * @param {Object} c_chess
+			 */
+			function checkHasBoss(x, y, mx, my, move_dir, c_chess){
+				let move_distance_x = mx - x; //x坐标移动距离
+				let move_distance_y = my - y; //y坐标移动距离
+				let num = 0;
+				let dx = x;
+				let dy = y;
+				let result = {'num':num, 'has_boss':false,'boss_x':-1,'boss_y':-1};
+				console.log("move_dir", move_dir);
+				while(true){
+					dx += move_dir[0];
+					dy += move_dir[1];
+					
+					//console.log("dx, dy", dx, dy);
+					//console.log("c_chess["+dy+"]["+dx+"]", c_chess[dy][dx]);
+					
+					if(dx < 0 || (move_dir[0] > 0 && dx > mx) || (move_dir[0] < 0 && dx <= mx)  || dy < 0 || (move_dir[1] > 0 && dy > my) || (move_dir[1] < 0 && dy < 0)){
+						break;
+					}
+					//console.log(c_chess);
+					//console.log("dy, dx", dy, dx);
+					//console.log("c_chess["+dy+"]["+dx+"]", c_chess[dy][dx]);
+					if(c_chess[dy][dx] != 0){
+						num += 1;
+						if(c_chess[dy][dx].chess_type == "boss"){
+							result.has_boss = true;
+							result.boss_x = dx;
+							result.boss_y = dy;
+						}
+					}
+					
+				}
+				result.num = num;
+				return result;
+				
+			}
+			
+			/**
+			 * 移动兵
+			 * @param clientX cx
+			 * @param clientY cy
+			 * @param moveX mx
+			 * @param moveY my
+			 */
+			function moveSoldier(cx, cy, mx, my){
+				//兵能够移动的方向坐标
+				let canMoveDirect = [
+					[0, 1]
+				];
+				
+				
+				if(qi == "black"){
+					canMoveDirect = [
+						[0, -1]
+					];
+				}
+				
+				/*let canMoveDirect = [
+					[-1, 0],[1, 0], [0, -1]
+				];
+				
+				if(qi == "black"){
+					canMoveDirect = [
+						[-1, 0],[1, 0], [0, 1]
+					];
+				}*/
+				
+				let move_distance_x = mx - cx; //x坐标移动距离
+				let move_distance_y = my - cy; //y坐标移动距离
+				let dx = move_distance_x<0?-1:move_distance_x==0?0:1;
+				let dy = move_distance_y<0?-1:move_distance_y==0?0:1;
+				
+				let is_pass_river = isPassRiver(cx, cy, qi);// 判断当前棋子是否过河
+				
+				if(is_pass_river){
+					canMoveDirect = qi=="red" ? [[-1, 0],[1, 0], [0, 1]]:[[-1, 0],[1, 0], [0, -1]];
+				}
+				
+				let move_dir = [move_distance_x, move_distance_y];
+				//console.log("total_row, total_col", total_row, total_col);
+				if(!isContained(move_dir, canMoveDirect) || mx < 0 || my < 0 || mx > total_col-1 || my > total_row-1){
+					alert("不能移动到此处");
+					return;
+				}
+				
+				update_chess(cx, cy, mx, my, qi);
+			}
+			
+			
+			
+			
+			/**
+			 * 落子
+			 */
+			$("#myCanvas").click(function(){
+				if(is_win){
+					alert("游戏已经结束，不能再落子， 请重新开局");
+					return;
+				}
+				
+				let x = event.pageX - $(this).offset().left;
+				let y = event.pageY - $(this).offset().top;
+				
+				let xi = Math.round((x  - space) / cell_width);
+				let yi =  Math.round((y  - space) / cell_height);
+				//这一步仅仅只是获取当前点击的棋子的信息
+				//如果点击的位置有棋子， 才获取该位置的信息
+				//console.log(red_chess.length);
+				if(xi < 0 || yi < 0 || xi > total_col - 1 || yi > total_row - 1){
+					console.log("不能移出边界");
+					return;
+				}
+				if(chess[yi][xi] != 0){
+					if(chess[yi][xi].color == qi){
+						chessAndPos.x = xi;
+						chessAndPos.y = yi;
+						chessAndPos.color = chess[yi][xi].color;
+						return;
+					}
+					
+				}
+				
+				// 判断棋子类型 还有 行棋者的颜色与点击颜色是否相等
+				//console.log(qi, chessAndPos.color);
+				//console.log(chess[chessAndPos.y][chessAndPos.x].chess_type);
+				//console.log(chessAndPos);
+				if(chessAndPos.x != -1 && chessAndPos.y != -1){
+					if(chessAndPos.color == qi){
+						if(chess[chessAndPos.y][chessAndPos.x].chess_type == "ma"){
+							//console.log("t2");
+							moveHorse(chessAndPos.x, chessAndPos.y, xi, yi);
+						}else if(chess[chessAndPos.y][chessAndPos.x].chess_type == "pao"){
+							movePao(chessAndPos.x, chessAndPos.y, xi, yi);
+						}else if(chess[chessAndPos.y][chessAndPos.x].chess_type == "che"){
+							moveCar(chessAndPos.x, chessAndPos.y, xi, yi);
+						}else if(chess[chessAndPos.y][chessAndPos.x].chess_type == "xiang"){
+							moveXiang(chessAndPos.x, chessAndPos.y, xi, yi);
+						}else if(chess[chessAndPos.y][chessAndPos.x].chess_type == "shi"){
+							moveShi(chessAndPos.x, chessAndPos.y, xi, yi);
+						}else if(chess[chessAndPos.y][chessAndPos.x].chess_type == "boss"){
+							moveBoss(chessAndPos.x, chessAndPos.y, xi, yi);
+						}else if(chess[chessAndPos.y][chessAndPos.x].chess_type == "soldier"){
+							moveSoldier(chessAndPos.x, chessAndPos.y, xi, yi);
+						}
+					}
+				}
+			});
+			
+			/**
+			 * 退一步
+			 */
+			$("#backBtn").click(function(){
+		
+			});
+			
+			/**
+			 * 重新开始
+			 */
+			$("#reStartBtn").click(function(){
+				rePlay();
+			});
+			
+			
+		</script>
+	
+
+</body></html>

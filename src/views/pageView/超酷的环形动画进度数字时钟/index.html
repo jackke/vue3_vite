@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- saved from url=(0185)https://www.17sucai.com/preview/3/2022-04-06/shizhong/%E2%95%97%E2%95%96%E2%95%A8%E2%95%AC%E2%95%9C%C2%B0%E2%95%A2%E2%95%9A%E2%95%A9%E2%96%92%E2%95%93%E2%95%99/progress-clock/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Progress Clock</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+	<div class="wrapper">
+		<div class="blackpink" id="year">BLA<span>C</span>KPI<span>N</span>K</div>
+	</div>
+	<!-- <div id="year"></div> -->
+<!-- partial:index.partial.html -->
+<div id="clock" class="progress-clock">
+	<button class="progress-clock__time-date" data-group="d" type="button">
+		<small data-unit="w">Friday</small><br>
+		<span data-unit="mo">April</span>
+		<span data-unit="d">15</span>
+	</button>
+	<button class="progress-clock__time-digit" data-unit="h" data-group="h" type="button">9</button>
+	<span class="progress-clock__time-colon">:</span>
+	<button class="progress-clock__time-digit" data-unit="m" data-group="m" type="button">48</button>
+	<span class="progress-clock__time-colon">:</span>
+	<button class="progress-clock__time-digit" data-unit="s" data-group="s" type="button">27</button>
+	<span class="progress-clock__time-ampm" data-unit="ap">AM</span>
+	<svg class="progress-clock__rings" width="256" height="256" viewBox="0 0 256 256">
+		<defs>
+			<lineargradient id="pc-red" x1="1" y1="0.5" x2="0" y2="0.5">
+				<stop offset="0%" stop-color="hsl(343,90%,55%)"></stop>
+				<stop offset="100%" stop-color="hsl(323,90%,55%)"></stop>
+			</lineargradient>
+			<lineargradient id="pc-yellow" x1="1" y1="0.5" x2="0" y2="0.5">
+				<stop offset="0%" stop-color="hsl(43,90%,55%)"></stop>
+				<stop offset="100%" stop-color="hsl(23,90%,55%)"></stop>
+			</lineargradient>
+			<lineargradient id="pc-blue" x1="1" y1="0.5" x2="0" y2="0.5">
+				<stop offset="0%" stop-color="hsl(223,90%,55%)"></stop>
+				<stop offset="100%" stop-color="hsl(203,90%,55%)"></stop>
+			</lineargradient>
+			<lineargradient id="pc-purple" x1="1" y1="0.5" x2="0" y2="0.5">
+				<stop offset="0%" stop-color="hsl(283,90%,55%)"></stop>
+				<stop offset="100%" stop-color="hsl(263,90%,55%)"></stop>
+			</lineargradient>
+		</defs>
+		<!-- Days of Month -->
+		<g data-units="d">
+			<circle class="progress-clock__ring" cx="128" cy="128" r="74" fill="none" opacity="0.1" stroke="url(#pc-red)" stroke-width="12"></circle>
+			<circle class="progress-clock__ring-fill" data-ring="mo" cx="128" cy="128" r="74" fill="none" stroke="url(#pc-red)" stroke-width="12" stroke-dasharray="465 465" stroke-dashoffset="241.66598958333336" stroke-linecap="round" transform="rotate(-90,128,128)"></circle>
+		</g>
+		<!-- Hours of Day -->
+		<g data-units="h">
+			<circle class="progress-clock__ring" cx="128" cy="128" r="90" fill="none" opacity="0.1" stroke="url(#pc-yellow)" stroke-width="12"></circle>
+			<circle class="progress-clock__ring-fill" data-ring="d" cx="128" cy="128" r="90" fill="none" stroke="url(#pc-yellow)" stroke-width="12" stroke-dasharray="565.5 565.5" stroke-dashoffset="334.41078124999996" stroke-linecap="round" transform="rotate(-90,128,128)"></circle>
+		</g>
+		<!-- Minutes of Hour -->
+		<g data-units="m">
+			<circle class="progress-clock__ring" cx="128" cy="128" r="106" fill="none" opacity="0.1" stroke="url(#pc-blue)" stroke-width="12"></circle>
+			<circle class="progress-clock__ring-fill" data-ring="h" cx="128" cy="128" r="106" fill="none" stroke="url(#pc-blue)" stroke-width="12" stroke-dasharray="666 666" stroke-dashoffset="128.205" stroke-linecap="round" transform="rotate(-90,128,128)"></circle>
+		</g>
+		<!-- Seconds of Minute -->
+		<g data-units="s">
+			<circle class="progress-clock__ring" cx="128" cy="128" r="122" fill="none" opacity="0.1" stroke="url(#pc-purple)" stroke-width="12"></circle>
+			<circle class="progress-clock__ring-fill" data-ring="m" cx="128" cy="128" r="122" fill="none" stroke="url(#pc-purple)" stroke-width="12" stroke-dasharray="766.5 766.5" stroke-dashoffset="421.57500000000005" stroke-linecap="round" transform="rotate(-90,128,128)"></circle>
+		</g>
+	</svg>
+</div>
+<!-- partial -->
+  <script src="./script.js"></script>
+
+
+
+</body></html>

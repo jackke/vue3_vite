@@ -1,0 +1,196 @@
+*{
+	margin:0px;
+	padding:0px;
+	border:none;
+	font-size: 12px;
+}
+
+ul,li{
+	list-style: none;
+}
+
+a{
+	text-decoration: none;
+}
+a:hover{
+	
+}
+
+/**清除浮动**/
+.clear{
+	clear:both;
+}
+
+body{
+	background:#e7edfb;
+}
+
+/***************以上是通用样式******************/
+.main{
+	width: 980px;
+	margin:0 auto;
+}
+.header{
+	width: 100%;
+	height: 167px;
+}
+
+.nav{
+	width: 100%;
+	height: 36px;
+	background: url(../images/mubg.jpg) repeat-x;
+}
+/**导航菜单样式**/
+.navlist{
+	width: auto;
+	height: 36px;
+	margin-left:10px;
+	float: left;
+}
+
+.navlist li{
+	float: left;
+	width:105px;
+	height:36px;
+}
+
+.navlist li a{
+	display: block;/*将a元素设置为块状，不然无法设置宽高*/
+	width: 100%;
+	height: 100%;
+	line-height: 36px;/*****设置行高，当行高等于高度的时候，文本垂直居中对齐****/
+	color:#FFF;
+	font-size: 14px;
+	font-weight: bold;/*加粗*/
+	text-align: center;
+}
+
+/****导航菜单选中样式，鼠标经过导航菜单样式，因为样式一样，所以可以一起写，格式 class名1,class名2...{样式代码}****/
+.navlist li a.curr,.navlist li a:hover{
+	background: url('../images/navhover22.jpg') no-repeat;
+}
+
+/**日期样式**/
+.date{
+	width: 230px;
+	height: 100%;
+	float: right;
+	color: rgb(255, 255, 0);
+}
+
+.date span{
+	display: block;/**span需要设置为块状元素(block,inline-block)才可以设置宽高**/
+	width: 220px;
+	height: 100%;
+	line-height: 36px;/*垂直居中*/
+	text-align: right;
+}
+/*****************举报电话跟文件下载部分*******************/
+.tips{
+	width: 100%;
+	height: 31px;
+	background: url(../images/gxll_sobg.gif) repeat-x;
+}
+
+.tips a{
+	
+}
+
+.tips a:hover{
+	text-decoration: underline;
+}
+
+/*****文件下载***/
+.file{
+	
+}
+
+.file a{
+	
+}
+
+.file a:hover{
+	
+}
+
+/**举报电话等链接信息**/
+.info{
+	
+}
+
+.info a{
+	
+}
+
+.info a:hover{
+	
+}
+
+
+/****************搜索*****************/
+.main-container{
+	width:100%;
+	height: auto;
+	background: #fff;
+}
+
+.search-wrap{
+	width: 240px;
+	height: 30px;
+	padding-left: 63px;
+	float: right;
+	margin-right:10px;
+	background: url(../images/gxll_sobox.gif) no-repeat;
+}
+/**搜索框样式**/
+#search-txt{
+	margin-top:5px;
+	display: block;
+	width: 179px;
+	height: 20px;
+	float: left;
+}
+/**搜索按钮样式**/
+#search-btn{
+	float: right;
+	width: 50px;
+	height: 22px;
+	margin-top:4px;
+	background: url(../images/seach.png) no-repeat;
+}
+
+/************/
+.container{
+	width: 100%;
+	height: auto;
+}
+
+/*****左边部分*****/
+.left-container{
+	float: left;
+	width: 745px;
+	height: auto;
+}
+
+/*****右边部分****/
+.right-container{
+	float: right;
+	width: 215px;
+	height: auto;
+}
+
+/***友情链接***/
+.friendlink{
+	width: 960px;
+	height: 100px;
+	margin:10px auto;/****两个参数(上下 左右)|四个参数(上右下左)****/
+	border: 1px solid #F93;
+}
+
+
+/***底部信息****/
+.footer{
+	height: 100px;
+	width: 100%;
+	border-top: 2px solid rgb(204, 51, 51);
+}

@@ -1,0 +1,85 @@
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> -->
+<!-- saved from url=(0064)https://www.17sucai.com/preview/2236/2013-06-20/flash/index.html -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>test</title>
+
+<link href="./screen.css" rel="stylesheet">
+<script type="text/javascript" src="./jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="./modernizr.min.js"></script>
+
+</head>
+<body>
+
+<div id="page">
+	<div id="viewport-shadow" class="trans">
+		<a href="https://www.17sucai.com/preview/2236/2013-06-20/flash/index.html#" id="prev" title="go to the next slide" class="trans"></a>
+		<a href="https://www.17sucai.com/preview/2236/2013-06-20/flash/index.html#" id="next" title="go to the next slide" class="trans"></a>
+		<div id="viewport" style="position: relative; perspective: 1000px; overflow: visible;">
+			<div id="box" class="" style="position: absolute; top: 0px; left: 0px; width: 891px; height: 441px; transform-style: preserve-3d; transform: translate3d(0px, 0px, -220.5px) rotate3d(1, 0, 0, -90deg); transition: -webkit-transform 1s ease 0s;">
+				<figure class="slide" style="position: absolute; top: 0px; left: 0px; width: 891px; height: 441px; transform: rotate3d(0, 1, 0, 0deg) translate3d(0px, 0px, 220.5px); z-index: 1;"><a href="https://www.17sucai.com/preview/2236/2013-06-20/flash/index.html#" target="_blank"><img src="./focus_1.jpg"></a></figure>
+				<figure class="slide" style="position: absolute; top: 0px; left: 0px; width: 891px; height: 441px; transform: rotate3d(1, 0, 0, 90deg) translate3d(0px, 0px, 220.5px); display: block; z-index: 2;"><a href="https://www.17sucai.com/preview/2236/2013-06-20/flash/index.html#" target="_blank"><img src="./focus_2.jpg"></a></figure>
+				<figure class="slide" style="position: absolute; top: 0px; left: 0px; width: 891px; height: 441px; transform: none; display: none;"><a href="https://www.17sucai.com/preview/2236/2013-06-20/flash/index.html#" target="_blank"><img src="./focus_3.jpg"></a></figure>
+				<figure class="slide" style="position: absolute; top: 0px; left: 0px; width: 891px; height: 441px; transform: none; display: none;"><img src="./focus_4.jpg"></figure>
+				<figure class="slide" style="position: absolute; top: 0px; left: 0px; width: 891px; height: 441px; transform: none; display: none;"><img src="./focus_5.jpg"></figure>
+			</div>
+		</div>
+		<div id="time-indicator" style="width: 661.102px; overflow: hidden;"></div>
+	</div>
+	<div class="slider-controls">
+		<ul id="controls">
+			<li><a class="goto-slide" href="https://www.17sucai.com/preview/2236/2013-06-20/flash/index.html#" data-slideindex="0"></a></li>
+			<li><a class="goto-slide current" href="https://www.17sucai.com/preview/2236/2013-06-20/flash/index.html#" data-slideindex="1"></a></li>
+			<li><a class="goto-slide" href="https://www.17sucai.com/preview/2236/2013-06-20/flash/index.html#" data-slideindex="2"></a></li>
+			<li><a class="goto-slide" href="https://www.17sucai.com/preview/2236/2013-06-20/flash/index.html#" data-slideindex="3"></a></li>
+			<li><a class="goto-slide" href="https://www.17sucai.com/preview/2236/2013-06-20/flash/index.html#" data-slideindex="4"></a></li>
+		</ul>
+	</div>
+</div>
+	
+<script type="text/javascript" src="./box-slider-all.jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+
+	var $box = $('#box'), $indicators = $('.goto-slide'), $timeIndicator = $('#time-indicator'), slideInterval = 5000;
+
+	var switchIndicator = function ($c, $n, currIndex, nextIndex) {
+		$timeIndicator.stop().css('width', 0);
+		$indicators.removeClass('current').eq(nextIndex).addClass('current');
+	};
+
+	var startTimeIndicator = function () {
+		$timeIndicator.animate({width: '891px'}, slideInterval);
+	};
+
+	// initialize the plugin with the desired settings
+	$box.boxSlider({
+		speed: 1000,
+		autoScroll: true,
+		timeout: slideInterval,
+		next: '#next',
+		prev: '#prev',
+		pause: '#pause',
+		effect: 'scrollVert3d', /*scrollVert3d and scrollHorz3d*/ 
+		blindCount: 15,
+		onbefore: switchIndicator,
+		onafter: startTimeIndicator
+	});
+
+	startTimeIndicator();
+
+	// pagination isn't built in simply because it's easy to
+	// roll your own with the plugin API methods
+	$('#controls').on('click', '.goto-slide', function (ev){
+		$box.boxSlider('showSlide', $(this).data('slideindex'));
+		ev.preventDefault();
+	});
+	
+});
+
+</script>
+
+
+
+</body></html>
