@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});const e=require("./index.5f310354.js"),o=e.defineComponent({__name:"app",setup(n){return(c,p)=>{const t=e.resolveComponent("router-view");return e.openBlock(),e.createBlock(t)}}});const _=e._export_sfc(o,[["__scopeId","data-v-610672e5"]]);exports.default=_;

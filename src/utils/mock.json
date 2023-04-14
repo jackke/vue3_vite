@@ -1,0 +1,1198 @@
+{
+    "data": [
+      {
+        "id": 125668,
+        "parentId": 0,
+        "type": 1,
+        "name": "用户管理",
+        "iconUrl": "",
+        "component": "",
+        "path": null,
+        "permissionFlag": "userManagement:head",
+        "sort": 1,
+        "children": [
+          {
+            "id": 125675,
+            "parentId": 125668,
+            "type": 1,
+            "name": "用户管理",
+            "iconUrl": "",
+            "component": "",
+            "path": null,
+            "permissionFlag": "userManagement:menu",
+            "sort": 1,
+            "children": [
+              {
+                "id": 125676,
+                "parentId": 125675,
+                "type": 2,
+                "name": "用户管理",
+                "iconUrl": "",
+                "component": "",
+                "path": "",
+                "permissionFlag": "aaa:page",
+                "sort": 1,
+                "children": [
+                  {
+                    "id": 125678,
+                    "parentId": 125676,
+                    "type": 3,
+                    "name": "导出",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "userManage:export",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 125669,
+        "parentId": 0,
+        "type": 1,
+        "name": "练习管理",
+        "iconUrl": "",
+        "component": "",
+        "path": null,
+        "permissionFlag": "childApp",
+        "sort": 2,
+        "children": [
+          {
+            "id": 125681,
+            "parentId": 125668,
+            "type": 1,
+            "name": "学习管理",
+            "iconUrl": "",
+            "component": "",
+            "path": null,
+            "permissionFlag": "xuexi:menu",
+            "sort": 2,
+            "children": [
+              {
+                "id": 125676,
+                "parentId": 125675,
+                "type": 2,
+                "name": "列表增删",
+                "iconUrl": "",
+                "component": "",
+                "path": "/chat",
+                "permissionFlag": "chat:page",
+                "sort": 1,
+                "children": null
+              },
+              {
+                "id": 125682,
+                "parentId": 125681,
+                "type": 2,
+                "name": "页面整理",
+                "iconUrl": "",
+                "component": "",
+                "path": "/boxList",
+                "permissionFlag": "boxList:page",
+                "sort": 1,
+                "children": null
+              },
+              {
+                "id": 125686,
+                "parentId": 125681,
+                "type": 2,
+                "name": "声纹练习",
+                "iconUrl": "",
+                "component": "",
+                "path": "/shengwen",
+                "permissionFlag": "shengwen:page",
+                "sort": 2,
+                "children": null
+              },
+              {
+                "id": 125689,
+                "parentId": 125681,
+                "type": 2,
+                "name": "充值记录",
+                "iconUrl": "",
+                "component": "attractionRechargeRevokeRecord",
+                "path": null,
+                "permissionFlag": "attractionRechargeRevokeRecord:page",
+                "sort": 3,
+                "children": null
+              },
+              {
+                "id": 125690,
+                "parentId": 125681,
+                "type": 2,
+                "name": "学习账单",
+                "iconUrl": "",
+                "component": "attractionBill",
+                "path": null,
+                "permissionFlag": "attractionBill:page",
+                "sort": 4,
+                "children": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 125670,
+        "parentId": 0,
+        "type": 1,
+        "name": "火山工具",
+        "iconUrl": "",
+        "component": "",
+        "path": null,
+        "permissionFlag": "volcanoTools:head",
+        "sort": 3,
+        "children": [
+          {
+            "id": 125852,
+            "parentId": 125670,
+            "type": 1,
+            "name": "虚拟用户",
+            "iconUrl": "",
+            "component": "",
+            "path": null,
+            "permissionFlag": "virtualUser:menu",
+            "sort": 1,
+            "children": [
+              {
+                "id": 125853,
+                "parentId": 125852,
+                "type": 2,
+                "name": "虚拟用户",
+                "iconUrl": "",
+                "component": "virtualUser",
+                "path": null,
+                "permissionFlag": "virtualUser:page",
+                "sort": 1,
+                "children": [
+                  {
+                    "id": 125854,
+                    "parentId": 125853,
+                    "type": 3,
+                    "name": "查看",
+                    "iconUrl": "",
+                    "component": "virtualUserDetail",
+                    "path": null,
+                    "permissionFlag": "virtualUserDetail:view",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125876,
+                    "parentId": 125853,
+                    "type": 3,
+                    "name": "批量导入用户",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "virtualUser:batchImport",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125855,
+                    "parentId": 125853,
+                    "type": 3,
+                    "name": "设置推荐/取消推荐",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "virtualUser:set",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              },
+              {
+                "id": 125856,
+                "parentId": 125852,
+                "type": 2,
+                "name": "虚拟引力",
+                "iconUrl": "",
+                "component": "virtualGravity",
+                "path": null,
+                "permissionFlag": "virtualGravity:page",
+                "sort": 2,
+                "children": [
+                  {
+                    "id": 125877,
+                    "parentId": 125856,
+                    "type": 3,
+                    "name": "批量充引力",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "virtualGravity:batchImport",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              },
+              {
+                "id": 125857,
+                "parentId": 125852,
+                "type": 2,
+                "name": "虚拟相册",
+                "iconUrl": "",
+                "component": "virtualAlbum",
+                "path": null,
+                "permissionFlag": "virtualAlbum:page",
+                "sort": 3,
+                "children": [
+                  {
+                    "id": 125858,
+                    "parentId": 125857,
+                    "type": 3,
+                    "name": "查看",
+                    "iconUrl": "",
+                    "component": "virtualAlbumDetail",
+                    "path": null,
+                    "permissionFlag": "virtualAlbumDetail:view",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125878,
+                    "parentId": 125857,
+                    "type": 3,
+                    "name": "批量上传照片",
+                    "iconUrl": "",
+                    "component": "virtualAlbumBatchImport",
+                    "path": null,
+                    "permissionFlag": "virtualAlbumBatchImport:batchImport",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125859,
+                    "parentId": 125857,
+                    "type": 3,
+                    "name": "设置解锁价格",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "virtualAlbum:set",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              },
+              {
+                "id": 125879,
+                "parentId": 125852,
+                "type": 2,
+                "name": "头像库管理",
+                "iconUrl": "",
+                "component": "avatarsManagement",
+                "path": null,
+                "permissionFlag": "avatarsManagement:page",
+                "sort": 4,
+                "children": [
+                  {
+                    "id": 125880,
+                    "parentId": 125879,
+                    "type": 3,
+                    "name": "批量上传头像",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "avatarsManagement:batchImport",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125882,
+                    "parentId": 125879,
+                    "type": 3,
+                    "name": "删除",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "avatarsManagement:delete",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125881,
+                    "parentId": 125879,
+                    "type": 3,
+                    "name": "导出",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "avatarsManagement:dl",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 125860,
+            "parentId": 125670,
+            "type": 1,
+            "name": "模拟发布",
+            "iconUrl": "",
+            "component": "",
+            "path": null,
+            "permissionFlag": "simulationPublish:menu",
+            "sort": 2,
+            "children": [
+              {
+                "id": 125861,
+                "parentId": 125860,
+                "type": 2,
+                "name": "快速发布",
+                "iconUrl": "",
+                "component": "fastPublish",
+                "path": null,
+                "permissionFlag": "fastPublish:page",
+                "sort": 1,
+                "children": [
+                  {
+                    "id": 125866,
+                    "parentId": 125861,
+                    "type": 3,
+                    "name": "禁用/启用",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "fastPublish:switch",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125862,
+                    "parentId": 125861,
+                    "type": 3,
+                    "name": "单条发布内容",
+                    "iconUrl": "",
+                    "component": "fastPublishAdd",
+                    "path": null,
+                    "permissionFlag": "fastPublishAdd:add",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125865,
+                    "parentId": 125861,
+                    "type": 3,
+                    "name": "批量发布内容",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "fastPublish:batchImport",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125864,
+                    "parentId": 125861,
+                    "type": 3,
+                    "name": "导出",
+                    "iconUrl": "",
+                    "component": "fastPublish",
+                    "path": null,
+                    "permissionFlag": "fastPublish:dl",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125863,
+                    "parentId": 125861,
+                    "type": 3,
+                    "name": "查看",
+                    "iconUrl": "",
+                    "component": "fastPublishView",
+                    "path": null,
+                    "permissionFlag": "fastPublishView:view",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 125868,
+            "parentId": 125670,
+            "type": 1,
+            "name": "模拟互动",
+            "iconUrl": "",
+            "component": "",
+            "path": null,
+            "permissionFlag": "simulationInteract:menu",
+            "sort": 3,
+            "children": [
+              {
+                "id": 125869,
+                "parentId": 125868,
+                "type": 2,
+                "name": "模拟关注",
+                "iconUrl": "",
+                "component": "simulationFocus",
+                "path": null,
+                "permissionFlag": "simulationFocus:page",
+                "sort": 1,
+                "children": [
+                  {
+                    "id": 125870,
+                    "parentId": 125869,
+                    "type": 3,
+                    "name": "增加粉丝",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "simulationFocus:addFans",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125871,
+                    "parentId": 125869,
+                    "type": 3,
+                    "name": "减少粉丝",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "simulationFocus:minusFans",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              },
+              {
+                "id": 125883,
+                "parentId": 125868,
+                "type": 2,
+                "name": "内容互动",
+                "iconUrl": "",
+                "component": "interactContent",
+                "path": null,
+                "permissionFlag": "interactContent:page",
+                "sort": 2,
+                "children": [
+                  {
+                    "id": 125884,
+                    "parentId": 125883,
+                    "type": 3,
+                    "name": "查看",
+                    "iconUrl": "",
+                    "component": "interactContentDetail",
+                    "path": null,
+                    "permissionFlag": "interactContentDetail:view",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125887,
+                    "parentId": 125883,
+                    "type": 3,
+                    "name": "导出",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "interactContent:dl",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125886,
+                    "parentId": 125883,
+                    "type": 3,
+                    "name": "点赞",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "interactContent:like",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125885,
+                    "parentId": 125883,
+                    "type": 3,
+                    "name": "评论",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "interactContent:comments",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 125671,
+        "parentId": 0,
+        "type": 1,
+        "name": "客服管理",
+        "iconUrl": "",
+        "component": "",
+        "path": null,
+        "permissionFlag": "customerServiceManagement:head",
+        "sort": 4,
+        "children": [
+          {
+            "id": 125888,
+            "parentId": 125671,
+            "type": 1,
+            "name": "举报管理",
+            "iconUrl": "",
+            "component": "",
+            "path": null,
+            "permissionFlag": "informManagement:menu",
+            "sort": 1,
+            "children": [
+              {
+                "id": 125889,
+                "parentId": 125888,
+                "type": 2,
+                "name": "举报管理",
+                "iconUrl": "",
+                "component": "informManagement",
+                "path": null,
+                "permissionFlag": "informManagement:page",
+                "sort": 1,
+                "children": [
+                  {
+                    "id": 125890,
+                    "parentId": 125889,
+                    "type": 3,
+                    "name": "查看",
+                    "iconUrl": "",
+                    "component": "informManagementDetail",
+                    "path": null,
+                    "permissionFlag": "informManagementDetail:view",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125891,
+                    "parentId": 125889,
+                    "type": 3,
+                    "name": "处理",
+                    "iconUrl": "",
+                    "component": "informManagementDetail",
+                    "path": null,
+                    "permissionFlag": "informManagementDetail:dispose",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 125672,
+        "parentId": 0,
+        "type": 1,
+        "name": "风控管理",
+        "iconUrl": "",
+        "component": "",
+        "path": null,
+        "permissionFlag": "riskManagement:head",
+        "sort": 5,
+        "children": [
+          {
+            "id": 125892,
+            "parentId": 125672,
+            "type": 1,
+            "name": "策略管理",
+            "iconUrl": "",
+            "component": "",
+            "path": null,
+            "permissionFlag": "strategicManagement:menu",
+            "sort": 1,
+            "children": [
+              {
+                "id": 125893,
+                "parentId": 125892,
+                "type": 2,
+                "name": "安全策略",
+                "iconUrl": "",
+                "component": "securityPolicy",
+                "path": null,
+                "permissionFlag": "securityPolicy:page",
+                "sort": 1,
+                "children": null
+              }
+            ]
+          },
+          {
+            "id": 125894,
+            "parentId": 125672,
+            "type": 1,
+            "name": "内容安全",
+            "iconUrl": "",
+            "component": "",
+            "path": null,
+            "permissionFlag": "contentSecurity:menu",
+            "sort": 2,
+            "children": [
+              {
+                "id": 125895,
+                "parentId": 125894,
+                "type": 2,
+                "name": "内容审核",
+                "iconUrl": "",
+                "component": "contentApproval",
+                "path": null,
+                "permissionFlag": "contentApproval:page",
+                "sort": 1,
+                "children": [
+                  {
+                    "id": 125897,
+                    "parentId": 125895,
+                    "type": 3,
+                    "name": "审核",
+                    "iconUrl": "",
+                    "component": "contentApprovalDetail",
+                    "path": null,
+                    "permissionFlag": "contentApprovalDetail:check",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125896,
+                    "parentId": 125895,
+                    "type": 3,
+                    "name": "查看",
+                    "iconUrl": "",
+                    "component": "contentApprovalDetail",
+                    "path": null,
+                    "permissionFlag": "contentApprovalDetail:view",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              },
+              {
+                "id": 125929,
+                "parentId": 125894,
+                "type": 2,
+                "name": "相册审核",
+                "iconUrl": "",
+                "component": "albumReview",
+                "path": null,
+                "permissionFlag": "albumReview",
+                "sort": 2,
+                "children": [
+                  {
+                    "id": 125931,
+                    "parentId": 125929,
+                    "type": 3,
+                    "name": "审核",
+                    "iconUrl": "",
+                    "component": "albumReviewDetail",
+                    "path": null,
+                    "permissionFlag": "albumReviewDetail:examin",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125930,
+                    "parentId": 125929,
+                    "type": 3,
+                    "name": "查看",
+                    "iconUrl": "",
+                    "component": "albumReviewDetail",
+                    "path": null,
+                    "permissionFlag": "albumReviewDetail:view",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 125901,
+            "parentId": 125672,
+            "type": 1,
+            "name": "黑名单管理",
+            "iconUrl": "",
+            "component": "",
+            "path": null,
+            "permissionFlag": "blacklistManagement:menu",
+            "sort": 4,
+            "children": [
+              {
+                "id": 125902,
+                "parentId": 125901,
+                "type": 2,
+                "name": "黑名单用户",
+                "iconUrl": "",
+                "component": "blacklistUser",
+                "path": null,
+                "permissionFlag": "blacklistUser:page",
+                "sort": 1,
+                "children": [
+                  {
+                    "id": 125903,
+                    "parentId": 125902,
+                    "type": 3,
+                    "name": "移出黑名单",
+                    "iconUrl": "",
+                    "component": "contentApprovalDetail",
+                    "path": null,
+                    "permissionFlag": "blacklistUser:delete",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              },
+              {
+                "id": 125905,
+                "parentId": 125901,
+                "type": 2,
+                "name": "黑名单设备",
+                "iconUrl": "",
+                "component": "blacklistDevice",
+                "path": null,
+                "permissionFlag": "blacklistDevice:page",
+                "sort": 2,
+                "children": [
+                  {
+                    "id": 125935,
+                    "parentId": 125905,
+                    "type": 3,
+                    "name": "移出黑名单",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "blacklistDevice:delete",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125906,
+                    "parentId": 125905,
+                    "type": 3,
+                    "name": "新增",
+                    "iconUrl": "",
+                    "component": "blacklistDeviceDetail",
+                    "path": null,
+                    "permissionFlag": "blacklistDeviceDetail:add",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              },
+              {
+                "id": 125907,
+                "parentId": 125901,
+                "type": 2,
+                "name": "黑名单IP",
+                "iconUrl": "",
+                "component": "blacklistIp",
+                "path": null,
+                "permissionFlag": "blacklistIp:page",
+                "sort": 3,
+                "children": [
+                  {
+                    "id": 125936,
+                    "parentId": 125907,
+                    "type": 3,
+                    "name": "移出黑名单",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "blacklistIp:delete",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125908,
+                    "parentId": 125907,
+                    "type": 3,
+                    "name": "新增",
+                    "iconUrl": "",
+                    "component": "blacklistIpDetail",
+                    "path": null,
+                    "permissionFlag": "blacklistIpDetail:add",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 125940,
+            "parentId": 125672,
+            "type": 1,
+            "name": "白名单管理",
+            "iconUrl": "",
+            "component": "",
+            "path": null,
+            "permissionFlag": "whiteList:menu",
+            "sort": 5,
+            "children": [
+              {
+                "id": 125941,
+                "parentId": 125940,
+                "type": 2,
+                "name": "白名单",
+                "iconUrl": "",
+                "component": "whiteList",
+                "path": null,
+                "permissionFlag": "whiteList:page",
+                "sort": 1,
+                "children": [
+                  {
+                    "id": 125943,
+                    "parentId": 125941,
+                    "type": 3,
+                    "name": "启用、禁用",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "whiteList:isable",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125942,
+                    "parentId": 125941,
+                    "type": 3,
+                    "name": "新增",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "whiteList:add",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 125673,
+        "parentId": 0,
+        "type": 1,
+        "name": "项目运营",
+        "iconUrl": "",
+        "component": "",
+        "path": null,
+        "permissionFlag": "projectOperation:head",
+        "sort": 6,
+        "children": [
+          {
+            "id": 125909,
+            "parentId": 125673,
+            "type": 1,
+            "name": "项目内容",
+            "iconUrl": "",
+            "component": "",
+            "path": null,
+            "permissionFlag": "projectContent:menu",
+            "sort": 1,
+            "children": [
+              {
+                "id": 125910,
+                "parentId": 125909,
+                "type": 2,
+                "name": "项目内容",
+                "iconUrl": "",
+                "component": "projectContent",
+                "path": null,
+                "permissionFlag": "projectContent:page",
+                "sort": 1,
+                "children": [
+                  {
+                    "id": 125912,
+                    "parentId": 125910,
+                    "type": 3,
+                    "name": "启用/禁用",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "projectContent:export",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125976,
+                    "parentId": 125910,
+                    "type": 3,
+                    "name": "发布",
+                    "iconUrl": "",
+                    "component": "projectContentDetail",
+                    "path": null,
+                    "permissionFlag": "projectContent:add",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125911,
+                    "parentId": 125910,
+                    "type": 3,
+                    "name": "查看",
+                    "iconUrl": "",
+                    "component": "projectContentDetail",
+                    "path": null,
+                    "permissionFlag": "projectContentDetail:view",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 125913,
+            "parentId": 125673,
+            "type": 1,
+            "name": "项目圈子",
+            "iconUrl": "",
+            "component": "",
+            "path": null,
+            "permissionFlag": "projectCircle:menu",
+            "sort": 2,
+            "children": [
+              {
+                "id": 125914,
+                "parentId": 125913,
+                "type": 2,
+                "name": "项目圈子",
+                "iconUrl": "",
+                "component": "projectCircle",
+                "path": null,
+                "permissionFlag": "projectCircle:page",
+                "sort": 1,
+                "children": [
+                  {
+                    "id": 125915,
+                    "parentId": 125914,
+                    "type": 3,
+                    "name": "批量移除",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "projectContent:delete",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125916,
+                    "parentId": 125914,
+                    "type": 3,
+                    "name": "导出",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "projectContent:export",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 125917,
+            "parentId": 125673,
+            "type": 1,
+            "name": "项目写手",
+            "iconUrl": "",
+            "component": "",
+            "path": null,
+            "permissionFlag": "projectWriter:menu",
+            "sort": 3,
+            "children": [
+              {
+                "id": 125918,
+                "parentId": 125917,
+                "type": 2,
+                "name": "项目写手",
+                "iconUrl": "",
+                "component": "projectWriter",
+                "path": null,
+                "permissionFlag": "projectWriter:page",
+                "sort": 1,
+                "children": [
+                  {
+                    "id": 251993,
+                    "parentId": 125918,
+                    "type": 3,
+                    "name": "查看",
+                    "iconUrl": "",
+                    "component": "projectWriterDetail",
+                    "path": null,
+                    "permissionFlag": "projectWriterDetail:view",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125920,
+                    "parentId": 125918,
+                    "type": 3,
+                    "name": "启用、禁用",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "projectWriter:export",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125919,
+                    "parentId": 125918,
+                    "type": 3,
+                    "name": "新增写手",
+                    "iconUrl": "",
+                    "component": "projectWriterDetail",
+                    "path": null,
+                    "permissionFlag": "projectWriterDetail:add",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 125674,
+        "parentId": 0,
+        "type": 1,
+        "name": "系统管理",
+        "iconUrl": "",
+        "component": "",
+        "path": null,
+        "permissionFlag": "systemManagement:head",
+        "sort": 7,
+        "children": [
+          {
+            "id": 125921,
+            "parentId": 125674,
+            "type": 1,
+            "name": "项目管理",
+            "iconUrl": "",
+            "component": "",
+            "path": null,
+            "permissionFlag": "projectManagement:menu",
+            "sort": 1,
+            "children": [
+              {
+                "id": 125922,
+                "parentId": 125921,
+                "type": 2,
+                "name": "项目管理",
+                "iconUrl": "",
+                "component": "projectManage",
+                "path": null,
+                "permissionFlag": "projectManage:page",
+                "sort": 1,
+                "children": [
+                  {
+                    "id": 125980,
+                    "parentId": 125922,
+                    "type": 3,
+                    "name": "编辑",
+                    "iconUrl": "",
+                    "component": "projectManageDetail",
+                    "path": null,
+                    "permissionFlag": "projectManageDetail:edit",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125924,
+                    "parentId": 125922,
+                    "type": 3,
+                    "name": "启用、禁用",
+                    "iconUrl": "",
+                    "component": "",
+                    "path": null,
+                    "permissionFlag": "projectManage:isable",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125925,
+                    "parentId": 125922,
+                    "type": 3,
+                    "name": "查看",
+                    "iconUrl": "",
+                    "component": "projectManageView",
+                    "path": null,
+                    "permissionFlag": "projectManageView:view",
+                    "sort": null,
+                    "children": null
+                  },
+                  {
+                    "id": 125923,
+                    "parentId": 125922,
+                    "type": 3,
+                    "name": "新增",
+                    "iconUrl": "",
+                    "component": "projectManageDetail",
+                    "path": null,
+                    "permissionFlag": "projectManageDetail:add",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 125932,
+            "parentId": 125674,
+            "type": 1,
+            "name": "下载中心",
+            "iconUrl": "",
+            "component": "",
+            "path": null,
+            "permissionFlag": "downloadCenter:menu",
+            "sort": 2,
+            "children": [
+              {
+                "id": 125933,
+                "parentId": 125932,
+                "type": 2,
+                "name": "下载中心",
+                "iconUrl": "",
+                "component": "downloadCenter",
+                "path": null,
+                "permissionFlag": "downloadCenter:page",
+                "sort": 1,
+                "children": [
+                  {
+                    "id": 125934,
+                    "parentId": 125933,
+                    "type": 3,
+                    "name": "下载",
+                    "iconUrl": "",
+                    "component": "downloadCenter",
+                    "path": null,
+                    "permissionFlag": "downloadCenter:load",
+                    "sort": null,
+                    "children": null
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
