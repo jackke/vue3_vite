@@ -88,7 +88,8 @@ export default defineComponent({
                     _this?.proxy?.$message({type: 'success', message: '跳转中...'})
                     console.log('查看', val.path, window.location.href);
                     // state.show = !state.show
-                    window.location.href = val.path
+                    // window.location.href = val.path
+                    window.open(val.path)
                 },
             }
     

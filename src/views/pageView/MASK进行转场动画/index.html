@@ -7,13 +7,16 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <title>MASK 使用</title>
     <style>
-        @import "compass/css3";
+        /* @import "compass/css3"; */
         /* MASK 玻璃磨砂质感 */
       body{
         margin: 0;
         height: auto;
-        display: grid;
-        place-content: center;
+        /* display: flex;
+        flex-direction: column;
+        justify-content: center; */
+        padding: 20px;
+        /* place-content: center; */
         }
         .prew{
             display: block;
@@ -72,7 +75,7 @@
             top: 0;left: 0; right: 0;bottom: 0;
             background: url('./原神4K壁纸.png') no-repeat;
             background-size:100% 100%;
-            animation: maskRotate 2s  steps(29) infinite;
+            animation: maskRotate 5s  steps(100) infinite;
         }
         @keyframes maskRotate {
             1%{
@@ -117,9 +120,11 @@
             height: 500px;
             /* background: url('https://img2020.cnblogs.com/blog/608782/202007/608782-20200706102517861-616339127.png') no-repeat; */
             /* background-size: 3000% 100%; */
-            -webkit-mask: url('https://img2020.cnblogs.com/blog/608782/202007/608782-20200706102517861-616339127.png');
+            mask: url('./原神4K壁纸.png');
+            -webkit-mask: url('./原神4K壁纸.png');
             /* -webkit-mask-composite: xor;  */
             /* -webkit-mask: url('https://media.prod.mdn.mozit.cloud/attachments/2016/03/03/12676/cef7251f571b727c87a4613cfb347bbc/star.svg'); */
+            mask-size: 3000% 100%;
             -webkit-mask-size: 3000% 100%;
             animation: maskMove 2s steps(30) infinite;
         }
@@ -135,12 +140,14 @@
         }
         @keyframes maskMove {
             from {
+                mask-position:0 0 ;
                 -webkit-mask-position: 0 0;
                 /* background-position: 0 0; */
                 /* -webkit-mask: linear-gradient(45deg, #000 1%, transparent 10%); */
 
             }
             to {
+                mask-position:100% 0 ;
                 -webkit-mask-position: 100% 0;
                 /* background-position: 100% 0; */
                 /* -webkit-mask: linear-gradient(45deg, #000 1%, transparent 100%); */
@@ -152,13 +159,13 @@
     <div>MASK 玻璃磨砂质感</div>
     <div class="wrap" id="img">
         <p>撒大嫂啥地方</p>
-        <img class="prew" src="https://tva1.sinaimg.cn/large/008i3skNgy1gubr2sbyqdj60xa0m6tey02.jpg">
+        <!-- <img class="prew" src="https://tva1.sinaimg.cn/large/008i3skNgy1gubr2sbyqdj60xa0m6tey02.jpg"> -->
     </div>
-    <!-- <div>MASK 图片重叠</div>
-    <div class="overlap"></div> -->
+    <div>MASK 图片重叠</div>
+    <div class="overlap"></div>
     <div>MASK 进行转场动画</div>
-    <!-- <div class="gradient"></div>
-    <div>MASK 进行转场动画-逐帧动画</div> -->
+    <div class="gradient"></div>
+    <div>MASK 进行转场动画-逐帧动画</div>
     <div class="mask"> 
         <div class="img1"> </div>
         <div class="img2"> </div>

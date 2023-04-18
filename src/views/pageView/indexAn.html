@@ -582,6 +582,8 @@
             transition-timing-function:ease-in;
         }
     
+    /* 腾讯 pag动画 */
+
 </style>
 <body>
     <div style="width:300px; height: 100%;" class="SidebarCreate_root-32O0z">
@@ -638,8 +640,12 @@
             <div class="four">Hover Me</div>
             <div class="five">Hover Me</div>
         </div>
+
+        <!-- 腾讯 pag 动画 -->
+        <canvas class="canvas" id="pag"></canvas>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/libpag@latest/lib/libpag.min.js"></script>
 <script>
     var hour  = document.querySelector('.hour');
     var min   = document.querySelector('.min');
@@ -654,5 +660,23 @@
     min.style.transform = `translate(-50%,-50%) rotateZ(${fen}deg)`;
     sec.style.transform = `translate(-50%,-50%) rotateZ(${miao}deg)`;
     },1000)
+
+    window.onload = async () => {
+    // 实例化 PAG
+    const PAG = await window.libpag.PAGInit();
+    // 获取 PAG 素材数据
+    const buffer = await fetch('./assets/text.pag').then((response) => response.arrayBuffer());
+    // 加载 PAG 素材为 PAGFile 对象
+    const pagFile = await PAG.PAGFile.load(buffer);
+    // 将画布尺寸设置为 PAGFile的尺寸
+    const canvas = document.getElementById('pag');
+    canvas.width = pagFile.width();
+    canvas.height = pagFile.height();
+    // 实例化 PAGView 对象
+    const pagView = await PAG.PAGView.init(pagFile, canvas);
+    // 播放 PAGView
+    await pagView.play();
+  };
+
 </script>
 </html>
