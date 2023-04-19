@@ -54,6 +54,12 @@ const routes = [
                         component: () => import('../views/shengwen/shengwen.vue'),
                         children:[]
                     },
+                    {
+                        path: '/virtualList',
+                        name: 'virtualList',
+                        component: () => import('../views/virtualList/virtualList.vue'),
+                        children:[]
+                    },
                 ]
             },
         ]

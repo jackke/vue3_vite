@@ -57,6 +57,12 @@
           <td>wavesurfer 版本(js声纹)</td>
           <td>{{devDependencies['wavesurfer.js'] }}</td>
         </tr>
+        <tr>
+          <td>vue-virtual-scroller (虚拟列表)</td>
+          <td>{{dependencies['vue-virtual-scroller'] }}</td>
+          <!-- <td>wavesurfer 版本(js声纹)</td>
+          <td>{{devDependencies['wavesurfer.js'] }}</td> -->
+        </tr>
       </table>
     </el-card>
   </template>

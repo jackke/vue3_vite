@@ -15,12 +15,14 @@ import Router from './router'
 import {store} from './store'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import 'default-passive-events'
-
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
+import VueVirtualScroller from 'vue-virtual-scroller'
 
 const app = createApp(App)
 app.use(Router) // 路由
 app.use(ElementPlus) // 使用
 app.use(store) // 加载vuex
+app.use(VueVirtualScroller) // 虚拟列表
 
 // 加载icon
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
