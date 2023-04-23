@@ -14,7 +14,7 @@
             <div style="height:600px;">
                 <div ref="list" class="infinite-list-container" @scroll="scrollEvent($event)">
                   <div class="infinite-list-phantom" :style="{ height: listHeight + 'px' }"></div>
-                      <div class="infinite-list" :style="{ transform: getTransform }">
+                    <div class="infinite-list" :style="{ transform: getTransform }">
                       <div ref="items"
                       class="infinite-list-item"
                       v-for="item in visibleData"
@@ -60,6 +60,26 @@
               </template>
             </RecycleScroller>
         </div>
+
+          <!-- ----- 虚拟列表3 start -->
+        <div style="width: 300px; border: 1px solid #ccc;margin-left: 20px; overflow: hidden;">
+          <div style="height: 60px;line-height: 60px;box-shadow: 0 10px 15px -5px #EEE;">虚拟列表3</div>
+          <div style="height:600px;overflow-y: auto;" @scroll="scrollEvent3" ref="list3">
+            <div :style="`height:${listHeight}px`">
+              <div :style="`padding-top:${init3.top}px`">
+                <div v-for="(item, index) in visibleData3" :key="index" >
+                  <div :style="`display:flex;box-sizing: border-box;padding: 10px; height:${itemSize}px;`" :key="item.id" id="itemH3">
+                      <div><img src="../../image/html.jpg" alt="" style="width: 60px; height: 60px;"></div>
+                      <div style="flex:1">
+                        <div style="word-wrap: break-word;width:100%">{{  item.name}}</div>
+                        <div style="word-wrap: break-word;width: 100%;">{{  item.api }}</div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
 </template>
 <script >
@@ -95,9 +115,17 @@ export default {
     //获取真实显示列表数据
     visibleData(){
       return this.listData.slice(this.start, Math.min(this.end,this.listData.length));
-    }
+    },
     // 虚拟列表1 end
 
+    // 虚拟列表3 start
+     //获取真实显示列表数据
+     visibleData3() {
+      // let endIdx = this.startIdx + this.visibleCount;
+      // if (endIdx >= this.listData.length) { endIdx = this.listData.length}
+      return this.listData.slice(this.startIdx, Math.min(this.endIdx,this.listData.length));
+    },
+    // 虚拟列表3 end
   },
   data() {
     return {
@@ -113,9 +141,18 @@ export default {
       // ----- 虚拟列表1 end
       // ----- 虚拟列表2 start
       listData: [],
+      listData3:[],
       itemSize: 100,
-      itemComponent
+      itemComponent,
       // ----- 虚拟列表2 end
+
+      // ----- 虚拟列表3 start
+      startIdx: 0,
+      endIdx: 0,
+      init3: {
+        top: 0,
+      }
+      // ----- 虚拟列表3 end
     };
   },
   mounted() {
@@ -127,11 +164,16 @@ export default {
       item.id = i+1
       return item
     })
+
      // ----- 虚拟列表1 start
     this.screenHeight = this.$el.clientHeight;
     this.start = 0;
     this.end = this.start + this.visibleCount;
      // ----- 虚拟列表1 end
+
+     // ----- 虚拟列表3 start
+     this.endIdx = this.startIdx + this.visibleCount;
+     // ----- 虚拟列表3 end
   },
   methods: {
      // ----- 虚拟列表1 start
@@ -144,8 +186,21 @@ export default {
       this.end = this.start + this.visibleCount;
       //此时的偏移量
       this.startOffset = scrollTop - (scrollTop % this.itemSize);
-    }
+    },
      // ----- 虚拟列表1 end
+
+    // ----- 虚拟列表3 start
+    scrollEvent3(){
+      //当前滚动位置
+      let scrollTop = this.$refs.list3.scrollTop
+      this.init3.top = scrollTop
+      //此时的开始索引
+      this.startIdx = Math.floor(scrollTop / this.itemSize);
+       //此时的结束索引
+      this.endIdx = this.startIdx + this.visibleCount;
+      console.log(scrollTop, this.endIdx);
+    }
+    // ----- 虚拟列表3 end
   }
 };
 
