@@ -11,7 +11,7 @@
        <div style="display: flex; flex-wrap: wrap; height: 100%; width: 100%;">
          <!-- <frameset style="width:100px;">
             <frame  v-for="(item, index) in list" :key="index"  :src="item.path" :name="'frame1'" />
-        </frameset> -->
+        </frameset> --> 
         <div v-for="(item, index) in list" :key="index" class="list" @click="onView(item)">
             <!-- <div>
                 <img class="images" :src="item.img" v-if="!item.imgUrl" mode="aspectFit|aspectFill|widthFix" lazy-load="false" />
@@ -77,21 +77,38 @@ export default defineComponent({
                 }, 1000);
             }
         }
-        // 需要延迟调用，frame没有渲染完成 获取不到
-        nextTick(() => {
-            // onHtml()
-        })
+        const onButton = () => {
+            document.querySelectorAll(".list").forEach((button:any) => {
+                // console.log(button);
+                button.onmousemove = (e:any) => {
+                    // console.log(e);
+                    const target = e.target;
+                    const rect = target.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
 
-        const methods ={
-                // 查看
-                onView(val:any){
-                    _this?.proxy?.$message({type: 'success', message: '跳转中...'})
-                    console.log('查看', val.path, window.location.href);
-                    // state.show = !state.show
-                    // window.location.href = val.path
-                    window.open(val.path)
-                },
-            }
+                    button.style.setProperty("--x", `${x}px`);
+                    button.style.setProperty("--y", `${y}px`);
+                    button.style.setProperty("--height", `${rect.height}px`);
+                    button.style.setProperty("--width", `${rect.width}px`);
+                };
+            });
+        }
+         // 需要延迟调用，frame没有渲染完成 获取不到
+         nextTick(() => {
+            // onHtml()
+            onButton()
+        })
+        const methods = {
+            // 查看
+            onView(val:any){
+                _this?.proxy?.$message({type: 'success', message: '跳转中...'})
+                console.log('查看', val.path, window.location.href);
+                // state.show = !state.show
+                // window.location.href = val.path
+                window.open(val.path)
+            },
+        }
     
    
         return {
@@ -133,13 +150,61 @@ export default defineComponent({
     margin-right: 10px;
     margin-bottom: 10px;
     border-radius: 20px;
-    background: #fff;
+    color:#fff;
+    background: #000;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     box-shadow: 0 10px 15px rgba(0,0,0,0.1);
     padding: 10px 0;
+    position: relative;
+    // box-shadow: 0 0 0 500vmin #fff;
+    pointer-events: all;
+    overflow: hidden;
+}
+.list::after {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: 0;
+    left: 0;
+    // filter: blur(2px) brightness(0);
+    background:
+        radial-gradient(
+        circle at center,
+        var(--lightest),
+        var(--light) 5%,
+        var(--dark) 30%,
+        var(--darkest) 50%
+        ),
+        var(--darkest);
+    // background-size: 0px 0px, 0px 0px, 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    opacity: 1;
+    // mix-blend-mode: lighten;
+    z-index: 2;
+    transition: transform 0.5s var(--elastic),
+        background-size 0.25s ease-in-out,
+        filter 0.5s ease-in-out;
+    transform: translate(calc(var(--x) - 50%), calc(var(--y) - 50%));
+    pointer-events: none;
+ }
+// .list:hover::before{
+//     filter: blur(2px) brightness(1);
+//     background-size: 0px 0px, 100% 100%, 100%;
+//     transition: transform 0.5s var(--elastic),
+//     background-size 0.25s ease-in-out;
+// }
+.list > div {
+    position: relative;
+    z-index: 9;
+    text-transform: uppercase;
+    text-shadow: clamp(-8px, calc((var(--width) / 2 - var(--x)) / 8), 8px)
+    clamp(-8px, calc((var(--height) / 2 - var(--y)) / 8), 8px) 12px
+    rgba(0, 0, 0, 0);
 }
 .iframe-box{
     width: 120px;
