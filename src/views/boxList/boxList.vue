@@ -12,7 +12,7 @@
          <!-- <frameset style="width:100px;">
             <frame  v-for="(item, index) in list" :key="index"  :src="item.path" :name="'frame1'" />
         </frameset> --> 
-        <div v-for="(item, index) in list" :key="index" class="list" @click="onView(item)">
+        <div v-for="(item, index) in list" :key="index" :class="'list ' + item.className" @click="onView(item)">
             <!-- <div>
                 <img class="images" :src="item.img" v-if="!item.imgUrl" mode="aspectFit|aspectFill|widthFix" lazy-load="false" />
                 <img class="images" :src="item.imgUrl" v-if="item.imgUrl" mode="aspectFit|aspectFill|widthFix" lazy-load="false" />
@@ -48,15 +48,19 @@ export default defineComponent({
     setup() {
         let tabelIndex = 0
         const ref1 = ref(null)
+        const styleName = ref('')
         const _this = getCurrentInstance() // 必须放在setup里面
         const state = reactive({
             show: false,
-            list: boxList.options,
+            list: [],
         })
         const dataFn = (val:number = 0, size:number = 10) => {
             var arrData:(object)[] = []
-            
-
+        }
+        const onList = () =>{
+            state.list = boxList.options.map((item) => {
+                return {...item, className: onRandomClassName()}
+            })
         }
         
         const onHtml = () => {
@@ -94,10 +98,16 @@ export default defineComponent({
                 };
             });
         }
+        const onRandomClassName = () => {
+            let className = ['fill', 'pulse', 'close' , 'raise', 'up', 'slide', 'offset']
+            var randomNum = Math.floor(Math.random() * 7);
+            return className[randomNum]
+        }
          // 需要延迟调用，frame没有渲染完成 获取不到
          nextTick(() => {
             // onHtml()
-            onButton()
+            // onButton()
+            onList()
         })
         const methods = {
             // 查看
@@ -145,53 +155,63 @@ export default defineComponent({
     text-align: left;
 }
 .list{
+    color: var(--color);
     width: 200px;
-    height: auto;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    border-radius: 20px;
-    color:#fff;
-    background: #000;
+    height: 80px;
+    // border-radius: 20px;
+    background: #222222;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-    padding: 10px 0;
-    position: relative;
-    // box-shadow: 0 0 0 500vmin #fff;
-    pointer-events: all;
+    border: 2px solid;
+    font: inherit;
+    line-height: 1;
+    margin: 0.5em;
+    padding: 1em 2em;
+    transition: all .5s;
+    text-overflow: ellipsis;/*隐藏后添加省略号*/
+    white-space: nowrap;/*强制不换行*/
     overflow: hidden;
+
+
+    // box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    // padding: 10px 0;
+    // position: relative;
+    // // box-shadow: 0 0 0 500vmin #fff;
+    // pointer-events: all;
+    // overflow: hidden;
 }
-.list::after {
-    content: "";
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    top: 0;
-    left: 0;
-    // filter: blur(2px) brightness(0);
-    background:
-        radial-gradient(
-        circle at center,
-        var(--lightest),
-        var(--light) 5%,
-        var(--dark) 30%,
-        var(--darkest) 50%
-        ),
-        var(--darkest);
-    // background-size: 0px 0px, 0px 0px, 100%;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    opacity: 1;
-    // mix-blend-mode: lighten;
-    z-index: 2;
-    transition: transform 0.5s var(--elastic),
-        background-size 0.25s ease-in-out,
-        filter 0.5s ease-in-out;
-    transform: translate(calc(var(--x) - 50%), calc(var(--y) - 50%));
-    pointer-events: none;
- }
+
+// .list::after {
+//     content: "";
+//     position: absolute;
+//     width: 200%;
+//     height: 200%;
+//     top: 0;
+//     left: 0;
+//     // filter: blur(2px) brightness(0);
+//     background:
+//         radial-gradient(
+//         circle at center,
+//         var(--lightest),
+//         var(--light) 5%,
+//         var(--dark) 30%,
+//         var(--darkest) 50%
+//         ),
+//         var(--darkest);
+//     // background-size: 0px 0px, 0px 0px, 100%;
+//     background-position: 50% 50%;
+//     background-repeat: no-repeat;
+//     opacity: 1;
+//     // mix-blend-mode: lighten;
+//     z-index: 2;
+//     transition: transform 0.5s var(--elastic),
+//         background-size 0.25s ease-in-out,
+//         filter 0.5s ease-in-out;
+//     transform: translate(calc(var(--x) - 50%), calc(var(--y) - 50%));
+//     pointer-events: none;
+//  }
 // .list:hover::before{
 //     filter: blur(2px) brightness(1);
 //     background-size: 0px 0px, 100% 100%, 100%;
@@ -227,5 +247,119 @@ export default defineComponent({
     transform:scale(0.2)
 }
 
+    .list:hover, .list:focus {
+        border-color: var(--hover);
+		color: #fff;
+    }
+    .fill:hover,
+	.fill:focus {
+		box-shadow: inset 0 0 0 58px var(--hover);
+	}
+
+	.pulse:hover,
+	.pulse:focus {
+		-webkit-animation: pulse 1s;
+		animation: pulse 1s;
+		box-shadow: 0 0 0 4em rgba(255, 255, 255, 0);
+	}
+
+	@-webkit-keyframes pulse {
+		0% {
+			box-shadow: 0 0 0 0 var(--hover);
+		}
+	}
+
+	@keyframes pulse {
+		0% {
+			box-shadow: 0 0 0 0 var(--hover);
+		}
+	}
+
+	.close:hover,
+	.close:focus {
+		box-shadow: inset -9em 0 0 0 var(--hover), inset 9em 0 0 0 var(--hover);
+	}
+
+	.raise:hover,
+	.raise:focus {
+		box-shadow: 0 1em 1em -1em var(--hover);
+		-webkit-transform: translateY(-.5em);
+		transform: translateY(-.5em);
+	}
+
+	.up:hover,
+	.up:focus {
+		box-shadow: inset 0 -7em 0 0 var(--hover);
+	}
+
+	.slide:hover,
+	.slide:focus {
+		box-shadow: inset 18em 0 0 0 var(--hover);
+	}
+
+	.offset {
+		box-shadow: 0.5em 0.5em 0 0 var(--color), inset 0.5em 0.5em 0 0 var(--color);
+	}
+
+	.offset:hover,
+	.offset:focus {
+		box-shadow: 0 0 0 0 var(--hover), inset 17em 6.5em 0 0 var(--hover);
+	}
+
+	.fill {
+		--color: #a972cb;
+		--hover: #cb72aa;
+	}
+
+	.pulse {
+		--color: #ef6eae;
+		--hover: #ef8f6e;
+	}
+
+	.close {
+		--color: #ff7f82;
+		--hover: #ffdc7f;
+	}
+
+	.raise {
+		--color: #ffa260;
+		--hover: #e5ff60;
+	}
+
+	.up {
+		--color: #e4cb58;
+		--hover: #94e458;
+	}
+
+	.slide {
+		--color: #8fc866;
+		--hover: #66c887;
+	}
+
+	.offset {
+		--color: #19bc8b;
+		--hover: #1973bc;
+	}
+
+	// button {
+	// 	color: var(--color);
+	// 	-webkit-transition: 0.25s;
+	// 	transition: 0.25s;
+	// }
+
+	// button:hover,
+	// button:focus {
+	// 	border-color: var(--hover);
+	// 	color: #fff;
+	// }
+
+	// button {
+	// 	background: none;
+	// 	border: 2px solid;
+	// 	font: inherit;
+	// 	line-height: 1;
+	// 	margin: 0.5em;
+	// 	padding: 1em 2em;
+	// }
 </style>
     

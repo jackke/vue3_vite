@@ -4,6 +4,7 @@ const img = '/src/image/html.jpg'
 const options = [
     {name:'css滑块滑动无缝切换 平滑切换动画', type: 'string', path: `${path}/css滑块滑动无缝切换_平滑切换动画/index.html`, img: img, imgUrl: ''},
     {name:'六边形彩色动画', type: 'string', path: `${path}/六边形彩色动画/index.html`, img: img, imgUrl: ''},
+    {name:'3D立方体', type: 'string', path: `${path}/3D立方体/index.html`, img: img, imgUrl: ''},
     {name:'3D百叶窗广告牌轮播特效', type: 'string', path: `${path}/3D百叶窗广告牌轮播特效/index.html`, img: img, imgUrl: ''},
     {name:'亮/暗风格的圆形和方块动画特效', type: 'string', path: `${path}/亮暗风格的圆形和方块动画特效/index.html`, img: img, imgUrl: ''},
     {name:'太空404', type: 'string', path: `${path}/太空404/index.html`, img: img, imgUrl: ''},

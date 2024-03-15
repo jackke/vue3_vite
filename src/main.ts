@@ -23,7 +23,6 @@ app.use(Router) // 路由
 app.use(ElementPlus) // 使用
 app.use(store) // 加载vuex
 app.use(VueVirtualScroller) // 虚拟列表
-
 // 加载icon
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.component(key, component)

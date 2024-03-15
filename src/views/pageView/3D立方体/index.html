@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 1000px;
+            height: 580px;
+            margin: 50px auto;
+            border: 1px solid green;
+            position: relative;
+        }
+
+        .top {
+            margin: 0 auto 0px;
+            padding: 10px 0;
+            background: firebrick;
+            color: #fff;
+        }
+
+        .dajianshi{
+            margin:100px auto 0;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            transform-style: preserve-3d;
+            animation: move 8s linear alternate infinite;
+        }
+        @keyframes move {
+            0% {
+            transform: rotateX(-30deg) rotateY(0deg);
+            }
+
+            100% {
+            transform: rotateX(-30deg) rotateY(360deg);
+            }
+        }
+        .m1,
+        .m2,
+        .m3,
+        .m4 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+            background-image: linear-gradient(rgb(49, 255, 49), rgb(9, 255, 9));
+        }
+
+        .m1 {
+            transform: translateZ(100px);
+        }
+        .m2 {
+            transform: rotateY(180deg) translateZ(100px);
+        }
+        .m3 {
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+        .m4 {
+            transform: rotateY(90deg) translateZ(100px);
+        }
+        .m5,.m6 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .m5 {
+            transform: rotateX(90deg) translateZ(100px);
+            background-color: rgba(49, 150, 49,0.1);
+        }
+        .m6 {
+            background-color: rgb(49, 255, 49);
+            transform: rotateX(-90deg) translateZ(250px);
+            box-shadow: 0 0 100px 30px rgb(9, 255, 9);
+            filter: blur(30px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+		<div class="top">
+			<h3>旋转的通透立方体</h3>
+		</div>
+		<div class="dajianshi">
+                   <div class="m1"></div>
+                   <div class="m2"></div>
+                   <div class="m3"></div>
+                   <div class="m4"></div>
+                   <div class="m5"></div>
+                   <div class="m6"></div>
+		</div>
+	</div>
+
+</body>
+</html>
