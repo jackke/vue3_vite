@@ -46,6 +46,11 @@ const options = [
     {name:'烟花', type: 'string', path: `${path}/烟花.html`, img: img, imgUrl: ''},
     {name:'MASK进行转场动画', type: 'string', path: `${path}/MASK进行转场动画/index.html`, img: img, imgUrl: ''},
     {name:'练习CSS', type: 'string', path: `${path}/indexAn.html`, img: img, imgUrl: ''},
+    {name:'地球围绕太阳旋转', type: 'string', path: `${path}/地球围绕太阳旋转/index.html`, img: img, imgUrl: ''},
+    {name:'loading 加载中。。。', type: 'string', path: `${path}/地球围绕太阳旋转/loading.html`, img: img, imgUrl: ''},
+    {name:'three.js', type: 'string', path: `${path}/three动画/index.html`, img: img, imgUrl: ''},
+    {name:'three鼠标滑动线', type: 'string', path: `${path}/three动画/index1.html`, img: img, imgUrl: ''},
+    {name:'旋转背景动画', type: 'string', path: `${path}/three动画/index2.html`, img: img, imgUrl: ''},
 
 ]
 
