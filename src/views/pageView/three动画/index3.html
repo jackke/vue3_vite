@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #webgl{
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            /* background: url(./image/shenkong.jpg);
+            background-size: 100% 100%; */
+        }
+    </style>
+</head>
+<body>
+    <!-- <img src="./diqiu.jpg" alt=""> -->
+    <div id="webgl"></div>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/three.js/r122/three.min.js"></script> -->
+    <script src="../../../utils/three.js"> </script>
+    <script src="../../../assets/controls/OrbitControls.js"> </script>
+    <script src="../../../assets/effects/OutlineEffect.js"> </script>
+    <script src="../../../assets/postprocessing/OutlinePass.js"> </script>
+ 
+    <script>
+        // import * as THREE from '../../../utils/three.module.js'
+        const scene = new THREE.Scene();
+        const group = new THREE.Group();
+        let camera = null;  // 相机
+        let renderer = null;    // 渲染器
+        let geometry = null;    // 背景
+        let cloudsMesh = null; //云层
+        let earth = null;   // 地球
+        var radius = 150
+       
+
+        // // 大气层光圈
+        // var texture1 = new THREE.TextureLoader().load( './image/guangquan.png' );
+		// var spriteMaterial = new THREE.SpriteMaterial( {
+        //     size: 2,
+		// 	map: texture1,
+		// 	transparent: true,
+		// 	opacity: 1,
+		// 	depthWrite: false
+		// } );
+		// var sprite = new THREE.Sprite( spriteMaterial );
+		// // sprite.scale.set( radius * 3, radius * 3, 1 );
+		// group.add( sprite );
+
+
+         // 深空背景
+        function initGeometry() {
+            const positions = [];
+            const colors = [];
+            const geometry = new THREE.BufferGeometry();
+            for (var i = 0; i < 10000; i ++) {
+                var vertex = new THREE.Vector3();
+                vertex.x = Math.random() * 2 - 1;
+                vertex.y = Math.random() * 2 - 1;
+                vertex.z = Math.random() * 2 - 1;
+                positions.push( vertex.x, vertex.y, vertex.z );
+                var color = new THREE.Color();
+                color.setHSL( Math.random() * 0.2 + 0.5, 0.55, Math.random() * 0.25 + 0.55 );
+                colors.push( color.r, color.g, color.b );
+            }
+            geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( positions, 3 ));
+            geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ));
+            var starsMaterial = new THREE.ParticleBasicMaterial( {
+                map: new THREE.TextureLoader().load('./image/xingqiu.jpg'),
+                size: .8,
+                transparent: true, // 材质透明
+                opacity: 1,
+                vertexColors: true, //true：且该几何体的colors属性有值，则该粒子会舍弃第一个属性--color，而应用该几何体的colors属性的颜色
+                depthTest: true, // 是否在渲染此材质时启用深度测试
+                depthWrite: false, // 渲染此材质是否对深度缓冲区有任何影响
+                blending: THREE.AdditiveBlending,
+                sizeAttenuation: true
+            } );
+            let stars = new THREE.ParticleSystem( geometry, starsMaterial );
+            // stars.position.set( 10, 10, 10 );
+            // stars.position.z = 1
+            stars.scale.set( 1000, 1000, 1000 );
+            // group.add( stars )
+            scene.add( stars );
+        }
+        initGeometry()
+        
+        // 地球
+        initMesh(radius);
+        function initMesh(radius) {
+             // 球体
+            let geometry = new THREE.SphereGeometry(radius, 32, 32)
+            // 材质
+            const material = new THREE.MeshPhongMaterial({
+                map: new THREE.TextureLoader().load('./image/diqiu.jpg'),
+                // bumpMap: earthBumpTexture, // 凹凸贴图纹理
+                bumpScale: 0.15, // 凹凸贴图会对材质产生多大影响 0～1
+                // specularMap: earthSpecTexture, // 镜面反射贴图
+                specular: new THREE.Color("#909090"), // 材质的高光颜色
+                shininess: 5, // 高亮的程度，越高越亮
+                transparent: true, // 材质透明
+                side: THREE.DoubleSide // 定义将要渲染哪一面，THREE.DoubleSide是两面
+
+            })
+            // 物体 
+            earth = new THREE.Mesh(geometry, material)
+            // group.rotation.set( 0, 0, 0 ); // 旋转角度
+            earth.position.set(10, 10, 10) // 位置
+            scene.add( earth )
+        }
+
+        // 地球云层
+        initClouds(radius);
+        function initClouds(radius) {
+             // 球体
+            let clouds = new THREE.SphereGeometry(radius, 150, 150)
+            // 材质
+            const material = new THREE.MeshPhongMaterial({
+                map: new THREE.TextureLoader().load('./image/yunceng.jpg') ,
+                transparent: true, // 材质透明
+                opacity: 0.2
+            })
+            // 物体 
+            cloudsMesh = new THREE.Mesh(clouds, material)
+            cloudsMesh.position.set(10, 10, 10) // 位置要跟地球一样
+            scene.add( cloudsMesh )
+        }
+
+        // 地球光晕
+        // initTexture(radius);
+        //     function initTexture(radius) {
+        //         var spriteMaterial = new THREE.SpriteMaterial( {
+        //         map: new THREE.TextureLoader().load('./image/guangyun.png') ,
+        //         transparent: true,
+        //         opacity: .2,
+        //         depthWrite: false
+        //     });
+
+        //     var sprite = new THREE.Sprite( spriteMaterial );
+        //     sprite.position.set(50, 50, 50)
+        //     sprite.scale.set( radius * 3, radius * 3, 1 );
+        //     scene.add( sprite );
+        // }
+        
+    
+
+
+        // 视窗尺寸
+        const width = window.innerWidth
+        const height = 800
+        // 创建相机
+        function initCamera(){
+            camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 800)
+            camera.position.set(200, 200, 200)// 相机位置
+            camera.lookAt(earth.position) // 相机朝向
+        }
+        initCamera()
+
+        // 创建点光源
+        const light = new THREE.PointLight(0xffffff, 1, 100)
+        light.position.set(0, 0, 0)
+        scene.add(light)
+
+        // 创建环境光
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1)
+        directionalLight.position.set(80, 100, 50)// 设置光源的方向
+        directionalLight.target = earth// 设置光的target
+        scene.add(directionalLight)
+
+        // 创建渲染器
+        var OControls;
+        function initRenderer() {
+            renderer = new THREE.WebGLRenderer( { antialias: true, alpha: false } );
+            renderer.setPixelRatio( window.devicePixelRatio );
+            renderer.setSize( width, height );
+            //  3D 控制器
+            OControls = new THREE.OrbitControls(camera, renderer.domElement)
+            // 挂载到id为webgl的div
+            document.getElementById('webgl').appendChild(renderer.domElement)
+        }
+        initRenderer()
+        OControls.update()
+
+        // 卫星
+        initTexture();
+        function initTexture() {
+
+            let geometry1 = new THREE.PlaneGeometry( 100, 100 );
+			let material1 = new THREE.MeshLambertMaterial( {
+				map: new THREE.TextureLoader().load('./image/guiji.png'), 
+				transparent: true,
+				side: THREE.DoubleSide, 
+				depthWrite: false
+			} );
+			let mesh = new THREE.Mesh( geometry1, material1 );
+            group.add( mesh );
+
+            // console.log(document.getElementById('webgl').clientHeight);
+
+            let p1 = new THREE.Vector3( - 7, 0, 0 );
+			let p2 = new THREE.Vector3( 7, 0, 0 );
+			const points = [ p1,p2];
+			const geometry = new THREE.BufferGeometry().setFromPoints( points );
+			let material = new THREE.PointsMaterial( {
+				map: new THREE.TextureLoader().load('./image/guiji.png'),
+				transparent: true,
+				side: THREE.DoubleSide, 
+				size: 1, 
+				depthWrite: false
+			} );
+			let earthPoints = new THREE.Points( geometry, material );
+			group.add( earthPoints );
+            group.rotation.set( 1.9, 0.5, 1 );
+            scene.add( group )
+        }
+       
+        // 循环调用
+        function animation() {
+            requestAnimationFrame(animation)
+            earth.rotation.y += 0.001
+            cloudsMesh.rotation.y += 0.0006
+            cloudsMesh.rotation.z += 0.0006
+            // camera.rotation.z += 0.001
+            renderer.render(scene,camera)
+        }
+        animation()
+     
+        /**
+         * 窗口变动
+         **/
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            renders();
+        }
+
+        // /**
+        //  *  渲染
+        //  */
+        function renders() {
+            console.log(12312312);
+            renderer.clear();
+            renderer.render( scene, camera );
+        }
+     
+        window.onload = () => {
+            // initRenderer();
+            // initCamera();
+            // initScene();
+            // initLight();
+            // initControls();
+            // animate();
+            window.addEventListener('resize', onWindowResize, false);
+        };
+
+    </script>
+</body>
+</html>

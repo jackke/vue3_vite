@@ -134,6 +134,80 @@
                 "children": null
               }
             ]
+          },
+          {
+            "id": 125681,
+            "parentId": 125668,
+            "type": 1,
+            "name": "three动画",
+            "iconUrl": "",
+            "component": "",
+            "path": null,
+            "permissionFlag": "three:menu",
+            "sort": 2,
+            "children": [
+              {
+                "id": 125672,
+                "parentId": 125672,
+                "type": 2,
+                "name": "地球",
+                "iconUrl": "",
+                "component": "",
+                "path": "/three1",
+                "permissionFlag": "three1:page",
+                "sort": 1,
+                "children": null
+              }
+            ]
+          },
+          {
+            "id": 125683,
+            "parentId": 125668,
+            "type": 1,
+            "name": "页面",
+            "iconUrl": "",
+            "component": "",
+            "path": null,
+            "permissionFlag": "loginView:menu",
+            "sort": 2,
+            "children": [
+              {
+                "id": 125672,
+                "parentId": 125672,
+                "type": 2,
+                "name": "login页面",
+                "iconUrl": "",
+                "component": "",
+                "path": "/loginView",
+                "permissionFlag": "loginView:page",
+                "sort": 1,
+                "children": null
+              },
+              {
+                "id": 125673,
+                "parentId": 125673,
+                "type": 2,
+                "name": "mask页面",
+                "iconUrl": "",
+                "component": "",
+                "path": "/maskView",
+                "permissionFlag": "maskView:page",
+                "sort": 1,
+                "children": null
+              },
+              {
+                "id": 125674,
+                "parentId": 125674,
+                "type": 2,
+                "name": "canvas页面",
+                "iconUrl": "",
+                "component": "",
+                "path": "/canvasView",
+                "permissionFlag": "canvasView:page",
+                "sort": 1,
+                "children": null
+              }
+            ]
           }
         ]
       },

@@ -60,6 +60,30 @@ const routes = [
                         component: () => import('../views/virtualList/virtualList.vue'),
                         children:[]
                     },
+                    {
+                        path: '/three1',
+                        name: 'three1',
+                        component: () => import('../views/three/three1.vue'),
+                        children:[]
+                    },
+                    {
+                        path: '/loginView',
+                        name: 'loginView',
+                        component: () => import('../views/loginHtml/index.vue'),
+                        children:[]
+                    },
+                    {
+                        path: '/maskView',
+                        name: 'maskView',
+                        component: () => import('../views/loginHtml/maskView.vue'),
+                        children:[]
+                    },
+                    {
+                        path: '/canvasView',
+                        name: 'canvasView',
+                        component: () => import('../views/loginHtml/canvasView.vue'),
+                        children:[]
+                    },
                 ]
             },
         ]
