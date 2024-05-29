@@ -102,5 +102,8 @@
     .flex-grow {
         flex-grow: 1;
     }
+    .el-main{
+      height: 90vh;
+    }
   </style>
   

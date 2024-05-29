@@ -84,6 +84,12 @@ const routes = [
                         component: () => import('../views/loginHtml/canvasView.vue'),
                         children:[]
                     },
+                    {
+                        path: '/htmlView',
+                        name: 'htmlView',
+                        component: () => import('../views/loginHtml/htmlView.vue'),
+                        children:[]
+                    },
                 ]
             },
         ]

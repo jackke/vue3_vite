@@ -91,7 +91,7 @@ export default {
         .bg{
             width: 100%;
             height: 100%;
-            background: url(../../image/mask1.jpeg);
+            background: url(../../assets/image/mask1.jpeg);
             filter: blur(5px); 
         }
         .content{
@@ -111,20 +111,17 @@ export default {
         .text{
             width: 340px;
             height: 196px;
-            -webkit-animation: move 100s infinite;
             animation: move 100s infinite;
-            background-image: url(../../image/mask1.jpeg);
+            background-image: url(../../assets/image/mask1.jpeg);
             background-size: cover;
-            -webkit-mask: url(http://www2.djicdn.com/assets/images/v3/logo-black2-145dcb13c56f36a65d084180a42136fa.svg);
             mask: url(http://www2.djicdn.com/assets/images/v3/logo-black2-145dcb13c56f36a65d084180a42136fa.svg);
-            -webkit-mask-size: cover;
             mask-size: cover;
         }
     }
     .mask3{
         width: 100%;
         height: 500px;
-        background: url("../../image/mask1.jpeg");
+        background: url("../../assets/image/mask1.jpeg");
         background-size: cover;
         position: relative;
         .wrap{
@@ -156,11 +153,11 @@ export default {
             height: 100%;
             left: 0;
             top: 0;
-            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E %3Cpath d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z'%3E%3C/path%3E %3C/svg%3E"), linear-gradient(red, red);
-            -webkit-mask-size: 100px, 100%;
-            -webkit-mask-repeat: no-repeat;
-            -webkit-mask-position: calc(var(--x, .5) * 100% + var(--x, .5) * 100px - 50px )  calc(var(--y, .5) * 100% + var(--y, .5) * 100px - 50px ), 0;
-            -webkit-mask-composite: xor; 
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E %3Cpath d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z'%3E%3C/path%3E %3C/svg%3E"), linear-gradient(red, red);
+            mask-size: 100px, 100%;
+            mask-repeat: no-repeat;
+            mask-position: calc(var(--x, .5) * 100% + var(--x, .5) * 100px - 50px )  calc(var(--y, .5) * 100% + var(--y, .5) * 100px - 50px ), 0;
+            mask-composite: xor; 
             mask-composite: exclude;
             background: rgba(0,0,0,.1);
             backdrop-filter: blur(10px)
@@ -170,33 +167,33 @@ export default {
             width: 100%;
             height: 500px;
             position: relative;
-            background: url('../../image/1519722.jpeg') no-repeat;
+            background: url('../../assets/image/1519722.jpeg') no-repeat;
             background-size:100% 100%;
         }
         .overlap::before {
             position: absolute;
             content: "";
             top: 0;left: 0; right: 0;bottom: 0;
-            background: url('../../image/wp2150006.webp') no-repeat;
+            background: url('../../assets/image/wp2150006.webp') no-repeat;
             background-size:100% 100%;
             /* -webkit-mask: linear-gradient(45deg, #000 50%, transparent 50%); */
-            -webkit-mask: linear-gradient(300deg, transparent 40%, #000 60%);
+            mask: linear-gradient(300deg, transparent 40%, #000 60%);
         }
         .overlap-1 {
             width: 100%;
             height: 500px;
             position: relative;
-            background: url('../../image/1519722.jpeg') no-repeat;
+            background: url('../../assets/image/1519722.jpeg') no-repeat;
             background-size:100% 100%;
         }
         .overlap-1::before {
             position: absolute;
             content: "";
             top: 0;left: 0; right: 0;bottom: 0;
-            background: url('../../image/wp2150006.webp') no-repeat;
+            background: url('../../assets/image/wp2150006.webp') no-repeat;
             background-size:100% 100%;
-            /* -webkit-mask: linear-gradient(45deg, #000 50%, transparent 50%); */
-            -webkit-mask: linear-gradient(45deg, #000 50%, transparent 50%);
+            /* mask: linear-gradient(45deg, #000 50%, transparent 50%); */
+            mask: linear-gradient(45deg, #000 50%, transparent 50%);
         }
 
         
@@ -209,7 +206,7 @@ export default {
             >div{
                 width: 200px;
                 height: 120px;
-                background-image: url("../../image/wp2150006.webp");
+                background-image: url("../../assets/image/wp2150006.webp");
                 mask: linear-gradient(135deg, transparent 15px, #fff 0)
                         top left,
                         linear-gradient(-135deg, transparent 15px, #fff 0)
@@ -236,14 +233,14 @@ export default {
         .gradient{
             width: 100%;
             height: 500px;
-            background: url('../../image/1519722.jpeg') no-repeat;
+            background: url('../../assets/image/1519722.jpeg') no-repeat;
             background-size:100% 100%;
             position: relative;
             &::before{
                 position: absolute;
                 content: "";
                 inset: 0;
-                background: url('../../image/wp2150006.webp');
+                background: url('../../assets/image/wp2150006.webp');
                 background-size:100% 100%;
                 animation: maskRotate 3s infinite;
             }
@@ -251,14 +248,14 @@ export default {
         .gradient1{
             width: 100%;
             height: 500px;
-            background: url('../../image/1519722.jpeg') no-repeat;
+            background: url('../../assets/image/1519722.jpeg') no-repeat;
             background-size:100% 100%;
             position: relative;
             &::before{
                 position: absolute;
                 content: "";
                 inset: 0;
-                background: url('../../image/wp2150006.webp');
+                background: url('../../assets/image/wp2150006.webp');
                 background-size:100% 100%;
                 animation: maskRotate1 3s infinite;
             }
@@ -266,14 +263,14 @@ export default {
         .gradient3{
             width: 100%;
             height: 500px;
-            background: url('../../image/1519722.jpeg') no-repeat;
+            background: url('../../assets/image/1519722.jpeg') no-repeat;
             background-size:100% 100%;
             position: relative;
             &::before{
                 position: absolute;
                 content: "";
                 inset: 0;
-                background: url('../../image/wp2150006.webp');
+                background: url('../../assets/image/wp2150006.webp');
                 background-size:100% 100%;
                 animation: maskRotate2 3s infinite;
             }
@@ -292,39 +289,40 @@ export default {
         .mask{
             width: 100%;
             height: 500px;
-           
             position: relative;
         }
         .img1{
             width: 100%;
             height: 100%;
-            background: url('../../image/1519722.jpeg') no-repeat left top;
+            background: url('../../assets/image/1519722.jpeg') no-repeat left top;
             background-size: cover;
         }
         .img2 {
             position: absolute;
-            top: 0;left: 0;
+            z-index: 9;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 500px;
-            /* background: url('https://img2020.cnblogs.com/blog/608782/202007/608782-20200706102517861-616339127.png') no-repeat; */
-            /* background-size: 3000% 100%; */
-            mask: url('../../image/wp2150006.webp');
-            -webkit-mask: url('../../image/wp2150006.webp');
-            /* -webkit-mask-composite: xor;  */
+            background: url("../../assets/image/mask1.jpeg") no-repeat left top;
+            background-size: 100% 100%;
+            mask: url('../../assets//image/maskzhen.png');
+            -webkit-mask: url('../../assets/image/maskzhen.png');
+            /*mask-composite: xor;  */
             /* -webkit-mask: url('https://media.prod.mdn.mozit.cloud/attachments/2016/03/03/12676/cef7251f571b727c87a4613cfb347bbc/star.svg'); */
             mask-size: 3000% 100%;
             -webkit-mask-size: 3000% 100%;
-            animation: maskMove 2s steps(30) infinite;
+            animation: maskMoveImg 2s steps(29) infinite;
+            // &::before{
+            //     content: "";
+            //     position: absolute;
+            //     inset:0;
+            //     width: 100%;
+            //     height: 100%;
+            //     background: url("../../assets/image/mask1.jpeg") no-repeat left top;
+            // }
         }
-        .img2::before {
-            width: 100%;
-            height: 500px;
-            position: absolute;
-            top: 0;left: 0;
-            background: url('../../image/1519722.jpeg') no-repeat;
-            background-size: cover;
-            /* background-size: 100% 100%; */
-        }
+    
         /* MASK 碰撞滤镜与混合模式 */
         .contrast{
             width: 100%;
@@ -404,19 +402,14 @@ export default {
         background-position: 100% 0;
     }
 }
-@keyframes maskMove {
-    0% {
-        mask-position:0 0 ;
+@keyframes maskMoveImg {
+    from{
+        mask-position: 0 0;
         -webkit-mask-position: 0 0;
-        /* background-position: 0 0; */
-        /* -webkit-mask: linear-gradient(45deg, #000 1%, transparent 10%); */
-
     }
-    100% {
-        mask-position:100% 0 ;
+    to {
+        mask-position: 100% 0;
         -webkit-mask-position: 100% 0;
-        /* background-position: 100% 0; */
-        /* -webkit-mask: linear-gradient(45deg, #000 1%, transparent 100%); */
     }
 }
 @keyframes maskRotate {
