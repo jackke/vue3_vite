@@ -218,6 +218,18 @@
                 "permissionFlag": "htmlView:page",
                 "sort": 1,
                 "children": null
+              },
+              {
+                "id": 125675,
+                "parentId": 125675,
+                "type": 2,
+                "name": "css页面",
+                "iconUrl": "",
+                "component": "",
+                "path": "/cssView",
+                "permissionFlag": "cssView:page",
+                "sort": 1,
+                "children": null
               }
             ]
           }
@@ -238,7 +250,7 @@
             "id": 125852,
             "parentId": 125670,
             "type": 1,
-            "name": "虚拟用户",
+            "name": "官网页面",
             "iconUrl": "",
             "component": "",
             "path": null,
@@ -249,50 +261,13 @@
                 "id": 125853,
                 "parentId": 125852,
                 "type": 2,
-                "name": "虚拟用户",
+                "name": "QuickStart",
                 "iconUrl": "",
-                "component": "virtualUser",
-                "path": null,
-                "permissionFlag": "virtualUser:page",
+                "component": "",
+                "path": "/quickStart",
+                "permissionFlag": "quickStart:page",
                 "sort": 1,
-                "children": [
-                  {
-                    "id": 125854,
-                    "parentId": 125853,
-                    "type": 3,
-                    "name": "查看",
-                    "iconUrl": "",
-                    "component": "virtualUserDetail",
-                    "path": null,
-                    "permissionFlag": "virtualUserDetail:view",
-                    "sort": null,
-                    "children": null
-                  },
-                  {
-                    "id": 125876,
-                    "parentId": 125853,
-                    "type": 3,
-                    "name": "批量导入用户",
-                    "iconUrl": "",
-                    "component": "",
-                    "path": null,
-                    "permissionFlag": "virtualUser:batchImport",
-                    "sort": null,
-                    "children": null
-                  },
-                  {
-                    "id": 125855,
-                    "parentId": 125853,
-                    "type": 3,
-                    "name": "设置推荐/取消推荐",
-                    "iconUrl": "",
-                    "component": "",
-                    "path": null,
-                    "permissionFlag": "virtualUser:set",
-                    "sort": null,
-                    "children": null
-                  }
-                ]
+                "children": []
               },
               {
                 "id": 125856,

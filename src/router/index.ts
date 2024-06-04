@@ -90,6 +90,18 @@ const routes = [
                         component: () => import('../views/loginHtml/htmlView.vue'),
                         children:[]
                     },
+                    {
+                        path: '/quickStart',
+                        name: 'qickStart',
+                        component: () => import('../views/volcanoTools/virtualUser/quickStart.vue'),
+                        children:[]
+                    },
+                    {
+                        path: '/cssView',
+                        name: 'cssView',
+                        component: () => import('../views/volcanoTools/cssHtml/cssHtml.vue'),
+                        children:[]
+                    },
                 ]
             },
         ]
