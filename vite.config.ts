@@ -42,7 +42,7 @@ export default defineConfig({
     electronRenderer()
   ],
   server:{
-    host: '0.0.0.0'
+    host: '0.0.0.0',
   },
   resolve: {
     alias:{

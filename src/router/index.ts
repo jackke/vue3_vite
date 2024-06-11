@@ -67,6 +67,18 @@ const routes = [
                         children:[]
                     },
                     {
+                        path: '/three2',
+                        name: 'three2',
+                        component: () => import('../views/three/three2.vue'),
+                        children:[]
+                    },
+                    {
+                        path: '/three3',
+                        name: 'three3',
+                        component: () => import('../views/three/three3.vue'),
+                        children:[]
+                    },
+                    {
                         path: '/loginView',
                         name: 'loginView',
                         component: () => import('../views/loginHtml/index.vue'),
@@ -97,11 +109,18 @@ const routes = [
                         children:[]
                     },
                     {
+                        path: '/Dynameic',
+                        name: 'Dynameic',
+                        component: () => import('../views/volcanoTools/virtualUser/Dynameic.vue'),
+                        children:[]
+                    },
+                    {
                         path: '/cssView',
                         name: 'cssView',
                         component: () => import('../views/volcanoTools/cssHtml/cssHtml.vue'),
                         children:[]
                     },
+                 
                 ]
             },
         ]

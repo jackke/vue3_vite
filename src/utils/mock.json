@@ -157,6 +157,30 @@
                 "permissionFlag": "three1:page",
                 "sort": 1,
                 "children": null
+              },
+              {
+                "id": 125672,
+                "parentId": 125672,
+                "type": 2,
+                "name": "福字",
+                "iconUrl": "",
+                "component": "",
+                "path": "/three2",
+                "permissionFlag": "three2:page",
+                "sort": 1,
+                "children": null
+              },
+              {
+                "id": 125672,
+                "parentId": 125672,
+                "type": 2,
+                "name": "720全景",
+                "iconUrl": "",
+                "component": "",
+                "path": "/three3",
+                "permissionFlag": "three3:page",
+                "sort": 1,
+                "children": null
               }
             ]
           },
@@ -273,26 +297,13 @@
                 "id": 125856,
                 "parentId": 125852,
                 "type": 2,
-                "name": "虚拟引力",
+                "name": "Dynameic",
                 "iconUrl": "",
-                "component": "virtualGravity",
-                "path": null,
-                "permissionFlag": "virtualGravity:page",
+                "component": "",
+                "path": "/dynameic",
+                "permissionFlag": "Dynameic:page",
                 "sort": 2,
-                "children": [
-                  {
-                    "id": 125877,
-                    "parentId": 125856,
-                    "type": 3,
-                    "name": "批量充引力",
-                    "iconUrl": "",
-                    "component": "",
-                    "path": null,
-                    "permissionFlag": "virtualGravity:batchImport",
-                    "sort": null,
-                    "children": null
-                  }
-                ]
+                "children": []
               },
               {
                 "id": 125857,
@@ -305,42 +316,7 @@
                 "permissionFlag": "virtualAlbum:page",
                 "sort": 3,
                 "children": [
-                  {
-                    "id": 125858,
-                    "parentId": 125857,
-                    "type": 3,
-                    "name": "查看",
-                    "iconUrl": "",
-                    "component": "virtualAlbumDetail",
-                    "path": null,
-                    "permissionFlag": "virtualAlbumDetail:view",
-                    "sort": null,
-                    "children": null
-                  },
-                  {
-                    "id": 125878,
-                    "parentId": 125857,
-                    "type": 3,
-                    "name": "批量上传照片",
-                    "iconUrl": "",
-                    "component": "virtualAlbumBatchImport",
-                    "path": null,
-                    "permissionFlag": "virtualAlbumBatchImport:batchImport",
-                    "sort": null,
-                    "children": null
-                  },
-                  {
-                    "id": 125859,
-                    "parentId": 125857,
-                    "type": 3,
-                    "name": "设置解锁价格",
-                    "iconUrl": "",
-                    "component": "",
-                    "path": null,
-                    "permissionFlag": "virtualAlbum:set",
-                    "sort": null,
-                    "children": null
-                  }
+                
                 ]
               },
               {
