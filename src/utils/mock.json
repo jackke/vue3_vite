@@ -15,7 +15,7 @@
             "id": 125675,
             "parentId": 125668,
             "type": 1,
-            "name": "用户管理",
+            "name": "练习html",
             "iconUrl": "",
             "component": "",
             "path": null,
@@ -26,26 +26,13 @@
                 "id": 125676,
                 "parentId": 125675,
                 "type": 2,
-                "name": "用户管理",
+                "name": "页面 1",
                 "iconUrl": "",
                 "component": "",
-                "path": "",
+                "path": "/marsEarth",
                 "permissionFlag": "aaa:page",
                 "sort": 1,
-                "children": [
-                  {
-                    "id": 125678,
-                    "parentId": 125676,
-                    "type": 3,
-                    "name": "导出",
-                    "iconUrl": "",
-                    "component": "",
-                    "path": null,
-                    "permissionFlag": "userManage:export",
-                    "sort": null,
-                    "children": null
-                  }
-                ]
+                "children": []
               }
             ]
           }

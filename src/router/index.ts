@@ -43,6 +43,12 @@ const routes = [
                         children:[]
                     },
                     {
+                        path: '/marsEarth',
+                        name: 'marsEarth',
+                        component: () => import('../views/mars/marsEarth.vue'),
+                        children:[]
+                    },
+                    {
                         path: '/boxList',
                         name: 'boxList',
                         component: () => import('../views/boxList/boxList.vue'),
@@ -96,6 +102,12 @@ const routes = [
                         component: () => import('../views/loginHtml/canvasView.vue'),
                         children:[]
                     },
+                    // {
+                    //     path: '/canvasView',
+                    //     name: 'canvasView',
+                    //     component: () => import('../views/loginHtml/canvasView.vue'),
+                    //     children:[]
+                    // },
                     {
                         path: '/htmlView',
                         name: 'htmlView',

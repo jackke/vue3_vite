@@ -1392,12 +1392,12 @@ import 'swiper/css';
 import jQuery from 'jquery';
 import gsap  from 'gsap';
 // import * from './gsap/splitText.js';
-import {ScrollTrigger, SplitText} from 'gsap/all';
+import {ScrollTrigger} from 'gsap/all';
 // import AOS from "aos"
 // import 'aos/dist/aos.css'
 
 import { onMounted, ref, nextTick } from 'vue';
-export default {  
+export default {
   setup() {
     const count = ref(0);
     const $ = jQuery
@@ -1422,7 +1422,10 @@ export default {
         // $('.vre-reveal-image-one')[0].style = 'width: 0;'
         // tl.to(".vre-reveal-image-one", { duration: 2, style: 'width: 100%'  })
         //    new AOS.init();
-        console.logh(SplitText, 'SplitText')
+        // console.logh(SplitText, 'SplitText')
+        function SplitText(D, u) {
+            
+        }
         (function ($) {
             "use strict";
             let device_width = window.innerWidth;
@@ -1611,17 +1614,17 @@ export default {
                 mobileMenuActivation: function () {
                 $(document).ready(function () {
                     $(".menu-bar-btn").on("click", function () {
-                    $(".nft-mobile-menu").toggleClass("mobile-menu-active");
+                        $(".nft-mobile-menu").toggleClass("mobile-menu-active");
                     });
 
                     $(".nft-mobile-menu ul li.has-submenu a").each(function () {
-                    $(this).on("click", function () {
-                        $(this).siblings("ul").slideToggle();
-                    });
+                        $(this).on("click", function () {
+                            $(this).siblings("ul").slideToggle();
+                        });
                     });
 
                     $(".close-menu").on("click", function () {
-                    $(".nft-mobile-menu").removeClass("mobile-menu-active");
+                        $(".nft-mobile-menu").removeClass("mobile-menu-active");
                     });
                 });
                 },

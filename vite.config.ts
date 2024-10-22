@@ -21,6 +21,10 @@ import electron from 'vite-plugin-electron'
 // 进程通信需要
 import electronRenderer from 'vite-plugin-electron-renderer'
 
+ // mars 火星地球
+// import { mars3dPlugin } from 'vite-plugin-mars3d';
+// import { externalizeDeps } from 'vite-plugin-externalize-deps'
+
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -39,7 +43,7 @@ export default defineConfig({
         entry: "electron-main/index.ts"
       }
     }), 
-    electronRenderer()
+    electronRenderer(),
   ],
   server:{
     host: '0.0.0.0',

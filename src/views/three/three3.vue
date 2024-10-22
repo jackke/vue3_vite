@@ -232,8 +232,8 @@ export default {
             let CSS3DSpriteFn = new CSS3DSprite(function (element) {
                 THREE.CSS3DObject.call(this, element)
             })
-            THREE.CSS3DSprite = 
-            THREE.CSS3DSprite.prototype = Object.create(THREE.CSS3DObject.prototype);//
+            // THREE.CSS3DSprite = 
+            // THREE.CSS3DSprite.prototype = Object.create(THREE.CSS3DObject.prototype);//
             let CSS3DRendererFn = new CSS3DRenderer(function () {
                 console.log('THREE.CSS3DRenderer', THREE.REVISION);
                 var _width, _height;
